@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:19:30 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/15 16:07:21 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/15 16:22:36 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,8 @@ int		handle_ops(char **ops, int *a, int len)
 		else if (ft_strequ(op, "rrb"))
 		{
 			temp = b[b_len - 1];
-			j = b_len - 1;
-			while (j > 0)
+			j = b_len;
+			while (j >= 0)
 			{
 				b[j + 1] = b[j];
 				j--;
@@ -161,16 +161,17 @@ int		handle_ops(char **ops, int *a, int len)
 			}
 			a[0] = temp;
 			temp = b[b_len - 1];
-			j = b_len - 1;
-			while (j > 0)
+			j = b_len;
+			while (j >= 0)
 			{
 				b[j + 1] = b[j];
 				j--;
 			}
 			b[0] = temp;
 		}
-		free(op);
 		i++;
+		j = 0;
+		ft_strdel(&op);
 	}
 	free(ops);
 	return (a_len);
