@@ -16,7 +16,9 @@
 # include <stdlib.h>
 # include <string.h>
 # include <wchar.h>
+# define BUFF_SIZE 32
 
+int				get_next_line(const int fd, char **line);
 char			*ft_ctos(char c);
 wchar_t			*ft_ctos_up(wchar_t c);
 char			*ft_strrev(char *str);
