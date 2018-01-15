@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:19:30 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/15 16:22:36 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/15 17:02:56 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		handle_ops(char **ops, int *a, int len)
 {
-	(void)ops;
 	int		i;
 	int		b[len];
 	char	*op;
@@ -174,5 +173,6 @@ int		handle_ops(char **ops, int *a, int len)
 		ft_strdel(&op);
 	}
 	free(ops);
+	ops = 0;
 	return (a_len);
 }

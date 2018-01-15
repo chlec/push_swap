@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/15 16:40:22 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/15 17:05:53 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*add_end(char *str, char *add)
 
 	if (!str || !add)
 		return (0);
-	if (!(ret = ft_strnew(ft_strlen(str) + ft_strlen(add) + 1)))
+	if (!(ret = ft_strnew(ft_strlen(str) + ft_strlen(add))))
 		return (0);
 	ft_strcat(ret, str);
 	ft_strcat(ret, add);
@@ -99,8 +99,9 @@ int		main(int argc, char **argv)
 		all_op = add_end(all_op, "\n");
 	}
 	ops = ft_strsplit(all_op, '\n');
+	ft_strdel(&all_op);
 	argc = handle_ops(ops, num, i - 1);
-	i = 0;
 	check_order(num, argc);
+	while(1) {}
 	return (0);
 }
