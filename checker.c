@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/15 15:17:22 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/15 16:40:22 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,23 @@ int		has_double(char *str, int *num, int len)
 	return (0);
 }
 
+void	check_order(int *num, int len)
+{
+	int		i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (num[i] > num[i + 1] && i < len - 1)
+		{
+			ft_putendl("KO");
+			return ;
+		}
+		i++;
+	}
+	ft_putendl("OK");
+}
+
 int		main(int argc, char **argv)
 {
 	char	*line;
@@ -69,7 +86,7 @@ int		main(int argc, char **argv)
 	{
 		if (!only_number(argv[i]) || has_double(argv[i], num, i - 1))
 		{
-			ft_putendl("Error");
+			ft_putendl_fd("Error", 2);
 			return (0);
 		}
 		num[i - 1] = ft_atoi(argv[i]);	
@@ -84,7 +101,6 @@ int		main(int argc, char **argv)
 	ops = ft_strsplit(all_op, '\n');
 	argc = handle_ops(ops, num, i - 1);
 	i = 0;
-	while (i < argc)
-		printf("%d\n", num[i++]);
+	check_order(num, argc);
 	return (0);
 }
