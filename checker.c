@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/15 17:05:53 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/15 17:22:56 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*add_end(char *str, char *add)
 		return (0);
 	ft_strcat(ret, str);
 	ft_strcat(ret, add);
+	ft_strdel(&str);
 	return (ret);
 }
 
@@ -92,11 +93,12 @@ int		main(int argc, char **argv)
 		num[i - 1] = ft_atoi(argv[i]);	
 		i++;
 	}
-	all_op = "";
+	all_op = ft_strnew(0);
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
 		all_op = add_end(all_op, line);
 		all_op = add_end(all_op, "\n");
+		ft_strdel(&line);
 	}
 	ops = ft_strsplit(all_op, '\n');
 	ft_strdel(&all_op);
