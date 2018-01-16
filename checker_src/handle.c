@@ -92,17 +92,17 @@ static int	check_rev_rotate(t_pile *a, t_pile *b, char *op)
 int		handle_ops(char **ops, t_pile *a, t_pile *b)
 {
 	int		i;
-	char	*op;
 
 	i = 0;
 	while (ops[i])
 	{
-		op = ops[i];
-		if (!(check_swap(a, b, op)))
-			if (!(check_push(a, b, op)))
-				if (!check_rotate(a, b, op))
-					check_rev_rotate(a, b, op);
-		ft_strdel(&op);
+		if (!(check_swap(a, b, ops[i])))
+			if (!(check_push(a, b, ops[i])))
+				if (!check_rotate(a, b, ops[i]))
+					check_rev_rotate(a, b, ops[i]);
+		printf("addr: %p\n", ops[i]);
+		ft_strdel(&ops[i]);
+		printf("addr: %p\n", ops[i]);
 		i++;
 	}
 	ft_strdel(&ops[i]);
