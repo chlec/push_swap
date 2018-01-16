@@ -26,14 +26,14 @@ static char	*add_end(char *str, char *add)
 	return (ret);
 }
 
-static void	check_order(t_pile *pile)
+static void	check_valid(t_pile *a, t_pile *b)
 {
 	int		i;
 
 	i = 0;
-	while (i < pile->len)
+	while (i < a->len)
 	{
-		if (pile->num[i] > pile->num[i + 1] && i < pile->len - 1)
+		if (b->len > 0 || (a->num[i] > a->num[i + 1] && i < a->len - 1))
 		{
 			ft_putendl("KO");
 			return ;
@@ -66,9 +66,11 @@ int			main(int argc, char **argv)
 {
 	int		i;
 	t_pile	*a;
+	t_pile	*b;
 	char	**ops;
 
 	a = new_pile(argc - 1);
+	b = new_pile(0);
 	i = 1;
 	while (i < argc)
 	{
@@ -81,7 +83,7 @@ int			main(int argc, char **argv)
 		i++;
 	}
 	ops = store_args();
-	a->len = handle_ops(ops, a);
-	check_order(a);
+	a->len = handle_ops(ops, a, b);
+	check_valid(a, b);
 	return (0);
 }

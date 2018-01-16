@@ -22,7 +22,7 @@ typedef struct	s_pile
 	int		len;
 }				t_pile;
 
-int				handle_ops(char **ops, t_pile *a);
+int				handle_ops(char **ops, t_pile *a, t_pile *b);
 int				only_number(char *str);
 int				has_double(char *str, t_pile *pile, int len);
 t_pile			*new_pile(int len);
