@@ -6,14 +6,15 @@
 #    By: clecalie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/15 16:24:08 by clecalie          #+#    #+#              #
-#    Updated: 2018/01/15 16:34:12 by clecalie         ###   ########.fr        #
+#    Updated: 2018/01/16 11:46:03 by clecalie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_CHECKER = checker
 
 SRCS = checker.c \
-	   handle.c
+	   handle.c \
+	   check_valid_arg.c
 
 OBJS = $(SRCS:.c=.o)
 

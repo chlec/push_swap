@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   check_valid_arg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/16 12:28:15 by clecalie         ###   ########.fr       */
+/*   Created: 2018/01/16 11:45:04 by clecalie          #+#    #+#             */
+/*   Updated: 2018/01/16 11:45:31 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
-# include <stdio.h>
-# include <stdlib.h>
-# include "libft.h"
+#include "checker.h"
 
-int				handle_ops(char **ops, int *a, int len);
-int				only_number(char *str);
-int				has_double(char *str, int *num, int len);
-
-typedef struct	s_pile
+int		only_number(char *str)
 {
-	int		*num;
-	size_t	length;
-}				t_pile;
+	int		i;
 
-#endif
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int		has_double(char *str, int *num, int len)
+{
+	int		nb;
+	int		i;
+
+	nb = ft_atoi(str);
+	i = 0;
+	while (i < len)
+	{
+		if (num[i] == nb)
+			return (1);
+		i++;
+	}
+	return (0);
+}

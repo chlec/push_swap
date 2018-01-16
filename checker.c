@@ -6,13 +6,13 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/15 17:22:56 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/16 11:49:02 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-char	*add_end(char *str, char *add)
+static char	*add_end(char *str, char *add)
 {
 	char	*ret;
 
@@ -26,37 +26,7 @@ char	*add_end(char *str, char *add)
 	return (ret);
 }
 
-int		only_number(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int		has_double(char *str, int *num, int len)
-{
-	int		nb;
-	int		i;
-
-	nb = ft_atoi(str);
-	i = 0;
-	while (i < len)
-	{
-		if (num[i] == nb)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	check_order(int *num, int len)
+static void	check_order(int *num, int len)
 {
 	int		i;
 
@@ -73,11 +43,27 @@ void	check_order(int *num, int len)
 	ft_putendl("OK");
 }
 
-int		main(int argc, char **argv)
+static char	**store_args(void)
 {
 	char	*line;
-	int		ret;
 	char	*all_op;
+	int		ret;
+	char	**ops;
+
+	all_op = ft_strnew(0);
+	while ((ret = get_next_line(0, &line)) > 0)
+	{
+		all_op = add_end(all_op, line);
+		all_op = add_end(all_op, "\n");
+		ft_strdel(&line);
+	}
+	ops = ft_strsplit(all_op, '\n');
+	ft_strdel(&all_op);
+	return (ops);
+}
+
+int			main(int argc, char **argv)
+{
 	int		i;
 	int		num[argc - 1];
 	char	**ops;
@@ -90,20 +76,11 @@ int		main(int argc, char **argv)
 			ft_putendl_fd("Error", 2);
 			return (0);
 		}
-		num[i - 1] = ft_atoi(argv[i]);	
+		num[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
-	all_op = ft_strnew(0);
-	while ((ret = get_next_line(0, &line)) > 0)
-	{
-		all_op = add_end(all_op, line);
-		all_op = add_end(all_op, "\n");
-		ft_strdel(&line);
-	}
-	ops = ft_strsplit(all_op, '\n');
-	ft_strdel(&all_op);
+	ops = store_args();
 	argc = handle_ops(ops, num, i - 1);
 	check_order(num, argc);
-	while(1) {}
 	return (0);
 }
