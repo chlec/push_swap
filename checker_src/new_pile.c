@@ -22,3 +22,15 @@ t_pile	*new_pile(int len)
 	pile->num = (int*)malloc(sizeof(int) * len);
 	return (pile);
 }
+
+void	free_pile(t_pile **pile)
+{
+	if (*pile)
+	{
+		if ((*pile)->num)
+			free((*pile)->num);
+		(*pile)->num = 0;
+		(*pile)->len = 0;
+		free(*pile);
+	}
+}

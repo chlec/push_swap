@@ -17,7 +17,7 @@ static char	*get_word(char const *str, int start, int end)
 	char	*word;
 	int		i;
 
-	if (!(word = (char*)malloc(sizeof(char) * (1 + end - start))))
+	if (!(word = (char*)malloc(sizeof(char) * (end - start))))
 		return (0);
 	i = 0;
 	while (start < end)
@@ -68,6 +68,8 @@ char		**ft_strsplit(char const *s, char c)
 		word = get_word(s, start, end);
 		if (word[0] != '\0' && ft_isprint(word[0]))
 			tab[id++] = word;
+		else
+			ft_strdel(&word);
 		start = end;
 	}
 	tab[id] = 0;

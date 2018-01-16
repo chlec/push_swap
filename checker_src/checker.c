@@ -71,6 +71,8 @@ int			main(int argc, char **argv)
 	}
 	a->len = handle_ops(ops, a, b);
 	check_valid(a, b);
+	free_pile(&a);
+	free_pile(&b);
 	while (1);
 	return (0);
 }

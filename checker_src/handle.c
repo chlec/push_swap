@@ -105,6 +105,7 @@ int		handle_ops(char **ops, t_pile *a, t_pile *b)
 		ft_strdel(&op);
 		i++;
 	}
+	ft_strdel(&ops[i]);
 	free(ops);
 	ops = 0;
 	return (a->len);
