@@ -16,7 +16,7 @@ PATH_CHECKER = checker_src/
 
 SRCS_CHECKER =	$(PATH_CHECKER)checker.c \
 	   			$(PATH_CHECKER)handle.c \
-	   			$(PATH_CHECKER)check_valid_arg.c \
+	   			$(PATH_CHECKER)check_error.c \
 	   			$(PATH_CHECKER)new_pile.c \
 	   			$(PATH_CHECKER)op.c
 

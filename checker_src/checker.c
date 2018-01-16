@@ -26,23 +26,6 @@ static char	*add_end(char *str, char *add)
 	return (ret);
 }
 
-static void	check_valid(t_pile *a, t_pile *b)
-{
-	int		i;
-
-	i = 0;
-	while (i < a->len)
-	{
-		if (b->len > 0 || (a->num[i] > a->num[i + 1] && i < a->len - 1))
-		{
-			ft_putendl("KO");
-			return ;
-		}
-		i++;
-	}
-	ft_putendl("OK");
-}
-
 static char	**store_args(void)
 {
 	char	*line;
@@ -71,8 +54,8 @@ int			main(int argc, char **argv)
 
 	a = new_pile(argc - 1);
 	b = new_pile(0);
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
 		if (!only_number(argv[i]) || has_double(argv[i], a, i - 1))
 		{
@@ -80,10 +63,14 @@ int			main(int argc, char **argv)
 			return (0);
 		}
 		a->num[i - 1] = ft_atoi(argv[i]);
-		i++;
 	}
-	ops = store_args();
+	if (!valid_ops((ops = store_args())))
+	{
+		ft_putendl_fd("Error", 2);
+		return (0);
+	}
 	a->len = handle_ops(ops, a, b);
 	check_valid(a, b);
+	while (1);
 	return (0);
 }
