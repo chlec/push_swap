@@ -17,8 +17,6 @@ int		handle_ops(char **ops, t_pile *a)
 	int		i;
 	t_pile	*b;
 	char	*op;
-	int		temp;
-	int		j;
 
 	b = new_pile(0);
 	i = 0;
@@ -26,147 +24,37 @@ int		handle_ops(char **ops, t_pile *a)
 	{
 		op = ops[i];
 		if (ft_strequ(op, "sa"))
-		{
-			temp = a->num[0];
-			a->num[0] = a->num[1];
-			a->num[1] = temp;
-		}
+			swap(a);
 		else if (ft_strequ(op, "sb"))
-		{
-			temp = b->num[0];
-			b->num[0] = b->num[1];
-			b->num[1] = temp;
-		}
+			swap(b);
 		else if (ft_strequ(op, "ss"))
 		{
-			temp = a->num[0];
-			a->num[0] = a->num[1];
-			a->num[1] = temp;
-			temp = b->num[0];
-			b->num[0] = b->num[1];
-			b->num[1] = temp;
+			swap(a);
+			swap(b);
 		}
 		else if (ft_strequ(op, "pa") && b->len > 0)
-		{
-			j = a->len;
-			while (j >= 0)
-			{
-				a->num[j + 1] = a->num[j];
-				j--;
-			}
-			a->num[0] = b->num[0];
-			j = 0;
-			while (j < b->len)
-			{
-				b->num[j] = b->num[j + 1];
-				j++;
-			}
-			a->len++;
-			b->len--;
-		}
+			push(a, b);
 		else if (ft_strequ(op, "pb") && a->len > 0)
-		{
-			j = b->len;
-			while (j >= 0)
-			{
-				b->num[j + 1] = b->num[j];
-				j--;
-			}
-			b->num[0] = a->num[0];
-			j = 0;
-			while (j < a->len)
-			{
-				a->num[j] = a->num[j + 1];
-				j++;
-			}
-			b->len++;
-			a->len--;
-		}
+			push(b, a);
 		else if (ft_strequ(op, "ra"))
-		{
-			temp = a->num[0];
-			j = 0;
-			while (j + 1 < a->len)
-			{
-				a->num[j] = a->num[j + 1];
-				j++;
-			}
-			a->num[j] = temp;
-		}
+			rotate(a);
 		else if (ft_strequ(op, "rb"))
-		{
-			temp = b->num[0];
-			j = 0;
-			while (j + 1 < b->len)
-			{
-				b->num[j] = b->num[j + 1];
-				j++;
-			}
-			b->num[j] = temp;
-		}
+			rotate(b);
 		else if (ft_strequ(op, "rr"))
 		{
-			temp = a->num[0];
-			j = 0;
-			while (j + 1 < a->len)
-			{
-				a->num[j] = a->num[j + 1];
-				j++;
-			}
-			a->num[j] = temp;
-			temp = b->num[0];
-			j = 0;
-			while (j + 1 < b->len)
-			{
-				b->num[j] = b->num[j + 1];
-				j++;
-			}
-			b->num[j] = temp;
-
+			rotate(a);
+			rotate(b);
 		}
 		else if (ft_strequ(op, "rra"))
-		{
-			temp = a->num[a->len - 1];
-			j = a->len;
-			while (j >= 0)
-			{
-				a->num[j + 1] = a->num[j];
-				j--;
-			}
-			a->num[0] = temp;
-		}
+			rev_rotate(a);
 		else if (ft_strequ(op, "rrb"))
-		{
-			temp = b->num[b->len - 1];
-			j = b->len;
-			while (j >= 0)
-			{
-				b->num[j + 1] = b->num[j];
-				j--;
-			}
-			b->num[0] = temp;
-		}
+			rev_rotate(b);
 		else if (ft_strequ(op, "rrr"))
 		{
-			temp = a->num[a->len - 1];
-			j = a->len;
-			while (j >= 0)
-			{
-				a->num[j + 1] = a->num[j];
-				j--;
-			}
-			a->num[0] = temp;
-			temp = b->num[b->len - 1];
-			j = b->len;
-			while (j >= 0)
-			{
-				b->num[j + 1] = b->num[j];
-				j--;
-			}
-			b->num[0] = temp;
+			rev_rotate(a);
+			rev_rotate(b);
 		}
 		i++;
-		j = 0;
 		ft_strdel(&op);
 	}
 	free(ops);

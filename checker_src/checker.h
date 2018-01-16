@@ -26,5 +26,9 @@ int				handle_ops(char **ops, t_pile *a);
 int				only_number(char *str);
 int				has_double(char *str, t_pile *pile, int len);
 t_pile			*new_pile(int len);
+void			swap(t_pile *pile);
+void			push(t_pile *a, t_pile *b);
+void			rotate(t_pile *pile);
+void			rev_rotate(t_pile *pile);
 
 #endif

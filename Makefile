@@ -17,11 +17,12 @@ PATH_CHECKER = checker_src/
 SRCS_CHECKER =	$(PATH_CHECKER)checker.c \
 	   			$(PATH_CHECKER)handle.c \
 	   			$(PATH_CHECKER)check_valid_arg.c \
-	   			$(PATH_CHECKER)new_pile.c
+	   			$(PATH_CHECKER)new_pile.c \
+	   			$(PATH_CHECKER)op.c
 
 OBJS_CHECKER = $(SRCS_CHECKER:.c=.o)
 
-OBJS_CHECKER_FILTERED = $(patsubst $(PATH_CHECKER)%, %, $(OBJS_CHECKER))
+OBJS_CHECKER_FILTERED = $(notdir $(OBJS_CHECKER))
 
 LIB_OBJS = libft/*.o
 
