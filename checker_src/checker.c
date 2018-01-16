@@ -20,9 +20,12 @@ static char	*add_end(char *str, char *add)
 		return (0);
 	if (!(ret = ft_strnew(ft_strlen(str) + ft_strlen(add))))
 		return (0);
-	ft_strcat(ret, str);
+	ft_strcpy(ret, str);
 	ft_strcat(ret, add);
+	printf("on vire la source...\n");
 	ft_strdel(&str);
+	printf("on vire lajout...\n");
+	ft_strdel(&add);
 	return (ret);
 }
 
@@ -32,12 +35,15 @@ static char	**store_args(void)
 	char	*all_op;
 	int		ret;
 	char	**ops;
+	char	*nl;
 
 	all_op = ft_strnew(0);
+	nl = 0;
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
+		nl = ft_strdup("\n");
 		all_op = add_end(all_op, line);
-		all_op = add_end(all_op, "\n");
+		all_op = add_end(all_op, nl);
 		ft_strdel(&line);
 	}
 	ops = ft_strsplit(all_op, '\n');
