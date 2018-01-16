@@ -16,14 +16,15 @@
 # include <stdlib.h>
 # include "libft.h"
 
-int				handle_ops(char **ops, int *a, int len);
-int				only_number(char *str);
-int				has_double(char *str, int *num, int len);
-
 typedef struct	s_pile
 {
 	int		*num;
-	size_t	length;
+	int		len;
 }				t_pile;
+
+int				handle_ops(char **ops, t_pile *a);
+int				only_number(char *str);
+int				has_double(char *str, t_pile *pile, int len);
+t_pile			*new_pile(int len);
 
 #endif

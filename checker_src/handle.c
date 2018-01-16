@@ -12,161 +12,158 @@
 
 #include "checker.h"
 
-int		handle_ops(char **ops, int *a, int len)
+int		handle_ops(char **ops, t_pile *a)
 {
 	int		i;
-	int		b[len];
+	t_pile	*b;
 	char	*op;
 	int		temp;
-	int		a_len;
-	int		b_len;
 	int		j;
 
-	a_len = len;
-	b_len = 0;
+	b = new_pile(0);
 	i = 0;
 	while (ops[i])
 	{
 		op = ops[i];
 		if (ft_strequ(op, "sa"))
 		{
-			temp = a[0];
-			a[0] = a[1];
-			a[1] = temp;
+			temp = a->num[0];
+			a->num[0] = a->num[1];
+			a->num[1] = temp;
 		}
 		else if (ft_strequ(op, "sb"))
 		{
-			temp = b[0];
-			b[0] = b[1];
-			b[1] = temp;
+			temp = b->num[0];
+			b->num[0] = b->num[1];
+			b->num[1] = temp;
 		}
 		else if (ft_strequ(op, "ss"))
 		{
-			temp = a[0];
-			a[0] = a[1];
-			a[1] = temp;
-			temp = b[0];
-			b[0] = b[1];
-			b[1] = temp;
+			temp = a->num[0];
+			a->num[0] = a->num[1];
+			a->num[1] = temp;
+			temp = b->num[0];
+			b->num[0] = b->num[1];
+			b->num[1] = temp;
 		}
-		else if (ft_strequ(op, "pa") && b_len > 0)
+		else if (ft_strequ(op, "pa") && b->len > 0)
 		{
-			j = a_len;
+			j = a->len;
 			while (j >= 0)
 			{
-				a[j + 1] = a[j];
+				a->num[j + 1] = a->num[j];
 				j--;
 			}
-			a[0] = b[0];
+			a->num[0] = b->num[0];
 			j = 0;
-			while (j < b_len)
+			while (j < b->len)
 			{
-				b[j] = b[j + 1];
+				b->num[j] = b->num[j + 1];
 				j++;
 			}
-			a_len++;
-			b_len--;
+			a->len++;
+			b->len--;
 		}
-		else if (ft_strequ(op, "pb") && a_len > 0)
+		else if (ft_strequ(op, "pb") && a->len > 0)
 		{
-			j = b_len;
+			j = b->len;
 			while (j >= 0)
 			{
-				b[j + 1] = b[j];
+				b->num[j + 1] = b->num[j];
 				j--;
 			}
-			b[0] = a[0];
+			b->num[0] = a->num[0];
 			j = 0;
-			while (j < a_len)
+			while (j < a->len)
 			{
-				a[j] = a[j + 1];
+				a->num[j] = a->num[j + 1];
 				j++;
 			}
-			b_len++;
-			a_len--;
+			b->len++;
+			a->len--;
 		}
 		else if (ft_strequ(op, "ra"))
 		{
-			temp = a[0];
+			temp = a->num[0];
 			j = 0;
-			while (j + 1 < a_len)
+			while (j + 1 < a->len)
 			{
-				a[j] = a[j + 1];
+				a->num[j] = a->num[j + 1];
 				j++;
 			}
-			a[j] = temp;
+			a->num[j] = temp;
 		}
 		else if (ft_strequ(op, "rb"))
 		{
-			temp = b[0];
+			temp = b->num[0];
 			j = 0;
-			while (j + 1 < b_len)
+			while (j + 1 < b->len)
 			{
-				b[j] = b[j + 1];
+				b->num[j] = b->num[j + 1];
 				j++;
 			}
-			b[j] = temp;
+			b->num[j] = temp;
 		}
 		else if (ft_strequ(op, "rr"))
 		{
-			temp = a[0];
+			temp = a->num[0];
 			j = 0;
-			while (j + 1 < a_len)
+			while (j + 1 < a->len)
 			{
-				a[j] = a[j + 1];
+				a->num[j] = a->num[j + 1];
 				j++;
 			}
-			a[j] = temp;
-			temp = b[0];
+			a->num[j] = temp;
+			temp = b->num[0];
 			j = 0;
-			while (j + 1 < b_len)
+			while (j + 1 < b->len)
 			{
-				b[j] = b[j + 1];
+				b->num[j] = b->num[j + 1];
 				j++;
 			}
-			b[j] = temp;
+			b->num[j] = temp;
 
 		}
 		else if (ft_strequ(op, "rra"))
 		{
-			temp = a[a_len - 1];
-			j = a_len;
+			temp = a->num[a->len - 1];
+			j = a->len;
 			while (j >= 0)
 			{
-				a[j + 1] = a[j];
+				a->num[j + 1] = a->num[j];
 				j--;
 			}
-			a[0] = temp;
+			a->num[0] = temp;
 		}
 		else if (ft_strequ(op, "rrb"))
 		{
-			temp = b[b_len - 1];
-			j = b_len;
+			temp = b->num[b->len - 1];
+			j = b->len;
 			while (j >= 0)
 			{
-				b[j + 1] = b[j];
+				b->num[j + 1] = b->num[j];
 				j--;
 			}
-			b[0] = temp;
+			b->num[0] = temp;
 		}
 		else if (ft_strequ(op, "rrr"))
 		{
-			temp = a[a_len - 1];
-			j = a_len;
+			temp = a->num[a->len - 1];
+			j = a->len;
 			while (j >= 0)
 			{
-				a[j + 1] = a[j];
+				a->num[j + 1] = a->num[j];
 				j--;
 			}
-			a[0] = temp;
-			temp = b[b_len - 1];
-			j = b_len;
+			a->num[0] = temp;
+			temp = b->num[b->len - 1];
+			j = b->len;
 			while (j >= 0)
 			{
-				b[j + 1] = b[j];
+				b->num[j + 1] = b->num[j];
 				j--;
 			}
-			b[0] = temp;
+			b->num[0] = temp;
 		}
 		i++;
 		j = 0;
@@ -174,5 +171,5 @@ int		handle_ops(char **ops, int *a, int len)
 	}
 	free(ops);
 	ops = 0;
-	return (a_len);
+	return (a->len);
 }

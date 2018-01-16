@@ -26,14 +26,14 @@ static char	*add_end(char *str, char *add)
 	return (ret);
 }
 
-static void	check_order(int *num, int len)
+static void	check_order(t_pile *pile)
 {
 	int		i;
 
 	i = 0;
-	while (i < len)
+	while (i < pile->len)
 	{
-		if (num[i] > num[i + 1] && i < len - 1)
+		if (pile->num[i] > pile->num[i + 1] && i < pile->len - 1)
 		{
 			ft_putendl("KO");
 			return ;
@@ -65,22 +65,23 @@ static char	**store_args(void)
 int			main(int argc, char **argv)
 {
 	int		i;
-	int		num[argc - 1];
+	t_pile	*a;
 	char	**ops;
 
+	a = new_pile(argc - 1);
 	i = 1;
 	while (i < argc)
 	{
-		if (!only_number(argv[i]) || has_double(argv[i], num, i - 1))
+		if (!only_number(argv[i]) || has_double(argv[i], a, i - 1))
 		{
 			ft_putendl_fd("Error", 2);
 			return (0);
 		}
-		num[i - 1] = ft_atoi(argv[i]);
+		a->num[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
 	ops = store_args();
-	argc = handle_ops(ops, num, i - 1);
-	check_order(num, argc);
+	a->len = handle_ops(ops, a);
+	check_order(a);
 	return (0);
 }

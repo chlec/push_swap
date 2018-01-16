@@ -1,43 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_valid_arg.c                                  :+:      :+:    :+:   */
+/*   new_pile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 11:45:04 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/16 11:45:31 by clecalie         ###   ########.fr       */
+/*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
+/*   Updated: 2018/01/16 11:49:02 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int		only_number(char *str)
+t_pile	*new_pile(int len)
 {
-	int		i;
+	t_pile *pile;
 
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int		has_double(char *str, int *num, int len)
-{
-	int		nb;
-	int		i;
-
-	nb = ft_atoi(str);
-	i = 0;
-	while (i < len)
-	{
-		if (num[i] == nb)
-			return (1);
-		i++;
-	}
-	return (0);
+	if (!(pile = (t_pile*)malloc(sizeof(t_pile))))
+		return (0);
+	pile->len = len;
+	pile->num = (int*)malloc(sizeof(int) * len);
+	return (pile);
 }
