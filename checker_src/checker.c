@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/16 11:49:02 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/17 11:32:05 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ static char	*add_end(char *str, char *add)
 		return (0);
 	ft_strcpy(ret, str);
 	ft_strcat(ret, add);
-	printf("on vire la source...\n");
 	ft_strdel(&str);
-	printf("on vire lajout...\n");
 	ft_strdel(&add);
 	return (ret);
 }
@@ -35,15 +33,12 @@ static char	**store_args(void)
 	char	*all_op;
 	int		ret;
 	char	**ops;
-	char	*nl;
 
 	all_op = ft_strnew(0);
-	nl = 0;
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
-		nl = ft_strdup("\n");
-		all_op = add_end(all_op, line);
-		all_op = add_end(all_op, nl);
+		all_op = add_end(all_op, ft_strdup(line));
+		all_op = add_end(all_op, ft_strdup("\n"));
 		ft_strdel(&line);
 	}
 	ops = ft_strsplit(all_op, '\n');

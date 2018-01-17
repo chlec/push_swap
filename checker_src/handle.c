@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:19:30 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/15 17:02:56 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/17 11:34:33 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,7 @@ int		handle_ops(char **ops, t_pile *a, t_pile *b)
 			if (!(check_push(a, b, ops[i])))
 				if (!check_rotate(a, b, ops[i]))
 					check_rev_rotate(a, b, ops[i]);
-		printf("addr: %p\n", ops[i]);
 		ft_strdel(&ops[i]);
-		printf("addr: %p\n", ops[i]);
 		i++;
 	}
 	ft_strdel(&ops[i]);
