@@ -10,15 +10,23 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME_CHECKER = checker
+NAME_1 = checker
 
-PATH_CHECKER = checker_src/
+NAME_2 = push_swap
 
-SRCS_CHECKER =	$(PATH_CHECKER)checker.c \
-	   			$(PATH_CHECKER)handle.c \
-	   			$(PATH_CHECKER)check_error.c \
-	   			$(PATH_CHECKER)new_pile.c \
-	   			$(PATH_CHECKER)op.c
+PATH_SRCS = srcs/
+
+HEADERS_FILES = includes/
+
+SRCS_CHECKER =	$(PATH_SRCS)checker.c \
+	   			$(PATH_SRCS)handle.c \
+	   			$(PATH_SRCS)check_error.c \
+	   			$(PATH_SRCS)new_pile.c \
+	   			$(PATH_SRCS)op.c
+
+SRCS_PUSH_SWAP =	$(PATH_PUSH_SWAP)main.c \
+	   				$(PATH_CHECKER)new_pile.c \
+	   				$(PATH_CHECKER)op.c
 
 OBJS_CHECKER = $(SRCS_CHECKER:.c=.o)
 
@@ -28,14 +36,14 @@ LIB_OBJS = libft/*.o
 
 FLAGS = -Wall -Werror -Wextra
 
-all: $(NAME_CHECKER)
+all: $(NAME_1)
 
-$(NAME_CHECKER): $(OBJS_CHECKER)
+$(NAME_1): $(OBJS_CHECKER)
 	make -C libft/
-	gcc $(FLAGS) $(OBJS_CHECKER_FILTERED) $(LIB_OBJS) -o $(NAME_CHECKER)
+	gcc $(FLAGS) $(OBJS_CHECKER_FILTERED) $(LIB_OBJS) -o $(NAME_1)
 
 %.o: %.c
-	gcc -c $< $(FLAGS) -I libft/includes
+	gcc -c $< $(FLAGS) -I libft/includes -I $(HEADERS_FILES)
 
 clean:
 	make -C libft/ clean
@@ -43,7 +51,7 @@ clean:
 
 fclean: clean
 	make -C libft/ fclean
-	rm -f $(NAME_CHECKER)
+	rm -f $(NAME_1)
 
 re: fclean all
 
