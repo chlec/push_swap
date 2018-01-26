@@ -24,9 +24,9 @@ SRCS_CHECKER =	$(PATH_SRCS)checker.c \
 	   			$(PATH_SRCS)new_pile.c \
 	   			$(PATH_SRCS)op.c
 
-SRCS_PUSH_SWAP =	$(PATH_PUSH_SWAP)main.c \
-	   				$(PATH_CHECKER)new_pile.c \
-	   				$(PATH_CHECKER)op.c
+SRCS_PUSH_SWAP =	$(PATH_SRCS)main.c \
+	   				$(PATH_SRCS)new_pile.c \
+	   				$(PATH_SRCS)op.c
 
 OBJS_CHECKER = $(SRCS_CHECKER:.c=.o)
 
@@ -38,11 +38,11 @@ FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME_1)
 
-$(NAME_1): $(OBJS_CHECKER)
+$(NAME_1): $(OBJS_CHECKER_FILTERED)
 	make -C libft/
 	gcc $(FLAGS) $(OBJS_CHECKER_FILTERED) $(LIB_OBJS) -o $(NAME_1)
 
-%.o: %.c
+%.o: $(PATH_SRCS)%.c
 	gcc -c $< $(FLAGS) -I libft/includes -I $(HEADERS_FILES)
 
 clean:
