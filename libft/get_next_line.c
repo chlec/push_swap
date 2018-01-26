@@ -12,106 +12,71 @@
 
 #include "includes/libft.h"
 
-static int		nl_index(char *buf)
+static char		*safe_join(char *s1, char const *s2)
 {
-	int		i;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*result;
 
-	i = 0;
-	while (buf[i])
+	s1_len = (s1) ? ft_strlen(s1) : 0;
+	s2_len = ft_strlen(s2);
+	result = ft_strnew(s1_len + s2_len);
+	if (result)
 	{
-		if (buf[i] == '\n')
-			return (i);
-		i++;
+		if (s1)
+			ft_memcpy(result, s1, s1_len);
+		ft_memcpy(result + s1_len, s2, s2_len);
 	}
-	return (-1);
+	if (s1)
+		ft_strdel(&s1);
+	return (result);
 }
 
-static char		*get_rest(char *buf)
+static int		cut_at_newline(char **s_buff, char **line)
 {
-	char	*end;
-	int		i;
+	char	*at;
 
-	i = 0;
-	while (buf[i])
+	if ((at = ft_strchr(*s_buff, '\n')))
 	{
-		if (buf[i] == '\n')
-		{
-			end = ft_strndup(buf, i + 1);
-			return (end);
-		}
-		i++;
-	}
-	end = ft_strdup(buf);
-	return (end);
-}
-
-static	int		check_rest(char **rest, char **content, char *buf, int ret)
-{
-	int		nl_pos;
-
-	if ((nl_pos = nl_index(buf)) > -1)
-	{
-		*rest = ft_strsub(buf, nl_pos + 1, ret - nl_pos);
-		ft_strncat(*content, buf, (size_t)nl_pos);
+		*line = ft_strsub(*s_buff, 0, at - *s_buff);
+		ft_strcpy(*s_buff, at + 1);
 		return (1);
 	}
 	return (0);
 }
 
-static int		readfile(int fd, char **content, char **rest)
+static void		clear(char **s_buff, char **line)
 {
-	int		ret;
-	char	buf[BUFF_SIZE + 1];
-	char	*temp;
-
-	while ((ret = read(fd, buf, BUFF_SIZE)))
-	{
-		if (ret == -1)
-			return (-1);
-		buf[ret] = '\0';
-		if (!(temp = ft_strnew(ft_strlen(*content) + 1)))
-			return (-1);
-		if (*content)
-		{
-			ft_strcpy(temp, *content);
-			free(*content);
-		}
-		if (!(*content = ft_strnew(ft_strlen(temp) + ft_strlen(buf) + 1)))
-			return (-1);
-		ft_strcpy(*content, temp);
-		free(temp);
-		if (check_rest(rest, content, buf, ret))
-			return (1);
-		ft_strcat(*content, buf);
-	}
-	return (!(*content == NULL && ret <= 0 && !ft_strlen(*rest)));
+	if (*s_buff)
+		ft_strdel(s_buff);
+	ft_strdel(line);
 }
 
-int				get_next_line(const int fd, char **line)
+int				get_next_line(int const fd, char **line)
 {
-	static char	*rest;
-	char		*content;
-	char		*temp;
-	int			ret;
+	int				bytes_read;
+	char			buff[BUFF_SIZE + 1];
+	static char		*s_buff = NULL;
 
-	if (BUFF_SIZE <= 0 || fd < 0 || fd == 1 || fd == 2 || !line)
+	if (!line)
 		return (-1);
-	content = 0;
-	temp = 0;
-	if (ft_strlen(rest) > 0)
+	if (s_buff && cut_at_newline(&s_buff, line))
+		return (1);
+	while ((bytes_read = read(fd, buff, BUFF_SIZE)) > 0)
 	{
-		content = get_rest(rest);
-		if (rest[ft_strlen(content) - 1])
-			temp = ft_strdup(&rest[ft_strlen(content)]);
-		free(rest);
-		rest = temp;
-		if (ft_strlen(rest) > 0 || ft_strchr(content, '\n'))
-		{
-			*line = ft_strndup(content, ft_strlen(content) - 1);
+		buff[bytes_read] = '\0';
+		s_buff = safe_join(s_buff, buff);
+		if (cut_at_newline(&s_buff, line))
 			return (1);
-		}
 	}
-	ret = readfile(fd, &content, &rest);
-	*line = content;
-	return (ret);
+	if (bytes_read == -1)
+		return (-1);
+	if (s_buff && *s_buff)
+	{
+		*line = ft_strdup(s_buff);
+		ft_strdel(&s_buff);
+		return (1);
+	}
+	clear(&s_buff, line);
+	return (0);
 }

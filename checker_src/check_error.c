@@ -65,9 +65,13 @@ void	check_valid(t_pile *a, t_pile *b)
 		if (b->len > 0 || (a->num[i] > a->num[i + 1] && i < a->len - 1))
 		{
 			ft_putendl("KO");
+			pile_del(&a);
+			pile_del(&b);
 			return ;
 		}
 		i++;
 	}
 	ft_putendl("OK");
+	pile_del(&a);
+	pile_del(&b);
 }

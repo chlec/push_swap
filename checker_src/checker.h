@@ -32,5 +32,6 @@ void			rotate(t_pile *pile);
 void			rev_rotate(t_pile *pile);
 void			check_valid(t_pile *a, t_pile *b);
 int				valid_ops(char **ops);
+void			pile_del(t_pile **pile);
 
 #endif
