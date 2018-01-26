@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/17 11:32:05 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/26 14:12:33 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			main(int argc, char **argv)
 	i = 0;
 	while (++i < argc)
 	{
-		if (!only_number(argv[i]) || has_double(argv[i], a, i - 1))
+		if (!only_number(argv[i]) || has_double(argv[i], a->num, i - 1))
 		{
 			ft_putendl_fd("Error", 2);
 			return (0);

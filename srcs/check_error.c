@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 11:45:04 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/16 11:45:31 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/26 14:12:16 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		only_number(char *str)
 	return (1);
 }
 
-int		has_double(char *str, t_pile *pile, int len)
+int		has_double(char *str, int *num, int len)
 {
 	int		nb;
 	int		i;
@@ -35,7 +35,7 @@ int		has_double(char *str, t_pile *pile, int len)
 	i = 0;
 	while (i < len)
 	{
-		if (pile->num[i] == nb)
+		if (num[i] == nb)
 			return (1);
 		i++;
 	}
