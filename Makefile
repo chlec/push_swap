@@ -6,7 +6,7 @@
 #    By: clecalie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/15 16:24:08 by clecalie          #+#    #+#              #
-#    Updated: 2018/01/26 14:19:40 by clecalie         ###   ########.fr        #
+#    Updated: 2018/01/30 16:46:12 by clecalie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS_CHECKER =	$(PATH_SRCS)checker.c \
 
 SRCS_PUSH_SWAP =	$(PATH_SRCS)main.c \
 	   				$(PATH_SRCS)check_error.c \
-					$(PATH_SRCS)new_pile.c
+					$(PATH_SRCS)new_pile.c \
+					$(PATH_SRCS)op.c
 
 OBJS_CHECKER = $(SRCS_CHECKER:.c=.o)
 

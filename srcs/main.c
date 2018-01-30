@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/30 16:00:47 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:06:36 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,42 +20,73 @@ void exchange(int *list, int x, int y, int len)
 	int		j;
 	int		c;
 	int		abs;
+	t_pile	*a;
+	t_pile	*b;
 
-	abs = x - y;
-	if ((x == 0 || x == 1) && (y == 0 || y == 1) && x != y)
-		ft_putendl("sa");
-	else if (ABS(x - y) > 0)
+	if (x != y)
 	{
-		abs = ABS(abs);
-		j = x < y ? x : y;
-		i = 0;
-		c = 0;
-		while (i < j)
-		{
-			ft_putendl("pb");
-			c++;
-			i++;
-		}
-		i = 0;
-		while (i < abs - 1)
+		a = new_pile(len);
+		b = new_pile(0);
+		i = -1;
+		while (++i < len)
+			a->num[i] = list[i];
+
+		abs = x - y;
+		if ((x == 0 || x == 1) && (y == 0 || y == 1) && x != y)
 		{
 			ft_putendl("sa");
-			ft_putendl("pb");
-			c++;
-			i++;
+			swap(a);	
 		}
-		ft_putendl("sa");
-		i = 0;
-		while (i < c)
+		else if (ABS(x - y) > 0)
 		{
-			ft_putendl("pa");
-			i++;
+			abs = ABS(abs);
+			j = x < y ? x : y;
+			i = 0;
+			c = 0;
+			while (i < j)
+			{
+				ft_putendl("pb");
+				push(b, a);
+				c++;
+				i++;
+			}
+			i = 0;
+			while (i < abs - 1)
+			{
+				ft_putendl("sa");
+				swap(a);
+				ft_putendl("pb");
+				push(b, a);
+				c++;
+				i++;
+			}
+			ft_putendl("sa");
+			i = 0;
+			while (i < c)
+			{
+				ft_putendl("pa");
+				push(a, b);
+	//			printf("a->len == %d, 0: %d, 1: %d\n", a->len, a->num[0], a->num[1]);
+				if (a->len >= 2 && a->num[0] > a->num[1])
+				{
+					ft_putendl("sa");
+					swap(a);
+				}
+				i++;
+			}
+			/*	if (list[x] > list[y])
+				{
+				ft_putendl("sa");
+				swap(a);
+				}*/
 		}
+		temp = list[x];
+		list[x] = list[y];
+		list[y] = temp;
+		pile_del(&a);
+		pile_del(&b);
+	//	display(list, len);
 	}
-	temp = list[x];
-	list[x] = list[y];
-	list[y] = temp;
-	display(list, len);
 }
 
 void quicksort(t_pile *a, int m, int n)
@@ -92,11 +123,11 @@ void quicksort(t_pile *a, int m, int n)
 void	resolve(t_pile *a, t_pile *b)
 {
 	(void)b;
-//	printf("Avant:\n");
-//	display(a->num, a->len);
+	//	printf("Avant:\n");
+	//	display(a->num, a->len);
 	quicksort(a, 0, a->len - 1);
-//	printf("Apres:\n");
-//	display(a->num, a->len);
+	//	printf("Apres:\n");
+	//	display(a->num, a->len);
 }
 
 int		main(int argc, char **argv)
