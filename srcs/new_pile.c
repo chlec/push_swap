@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/30 15:34:06 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:41:40 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ t_pile	*new_pile(int len)
 	if (!(pile = (t_pile*)malloc(sizeof(t_pile))))
 		return (0);
 	pile->len = len;
-	pile->num = (int*)malloc(sizeof(int) * len);
+	if (len > 0)
+		pile->num = (int*)malloc(sizeof(int) * len);
+	else
+		pile->num = 0;
 	return (pile);
 }
 

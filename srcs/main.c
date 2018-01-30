@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/30 17:31:24 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:42:08 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void exchange(t_pile *a, int x, int y)
 {
-//	int		temp;
 	int		i;
 	int		j;
 	int		c;
@@ -75,8 +74,8 @@ void exchange(t_pile *a, int x, int y)
 				i++;
 			}
 		}
-		//if (b)
-		//	pile_del(&b);
+		if (b)
+			pile_del(&b);
 	}
 }
 
@@ -111,28 +110,19 @@ void quicksort(t_pile *a, int m, int n)
 	}
 }
 
-void	resolve(t_pile *a, t_pile *b)
+void	resolve(t_pile *a)
 {
-	(void)b;
-	//	printf("Avant:\n");
-	//	display(a->num, a->len);
 	quicksort(a, 0, a->len - 1);
-	//	printf("Apres:\n");
-	//	display(a->num, a->len);
 }
 
 int		main(int argc, char **argv)
 {
 	int		i;
 	t_pile	*a;
-	t_pile	*b;
-	char	**ops;
 
 	if (argc > 2)
 	{
 		a = new_pile(argc - 1);
-		b = new_pile(0);
-		ops = 0;
 		i = 1;
 		while (i < argc)
 		{
@@ -144,7 +134,8 @@ int		main(int argc, char **argv)
 			a->num[i - 1] = ft_atoi(argv[i]);
 			i++;
 		}
-		resolve(a, b);
+		resolve(a);
+		pile_del(&a);
 	}
 	return (0);
 }
