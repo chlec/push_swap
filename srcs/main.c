@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/30 17:42:08 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:44:02 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void exchange(t_pile *a, int x, int y)
 
 	if (x != y)
 	{
-		b = new_pile(0);
+		b = new_pile(a->len);
+		b->len = 0;
 		abs = x - y;
 		if ((x == 0 || x == 1) && (y == 0 || y == 1) && x != y)
 		{

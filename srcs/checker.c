@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/30 15:55:12 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:49:58 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int			main(int argc, char **argv)
 	char	**ops;
 
 	a = new_pile(argc - 1);
-	b = new_pile(0);
+	b = new_pile(argc - 1);
+	b->len = 0;
 	i = 0;
 	while (++i < argc)
 	{
