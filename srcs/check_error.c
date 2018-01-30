@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 11:45:04 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/26 14:12:16 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:32:47 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	check_valid(t_pile *a, t_pile *b)
 		if (b->len > 0 || (a->num[i] > a->num[i + 1] && i < a->len - 1))
 		{
 			ft_putendl("KO");
-			pile_del(&a);
-			pile_del(&b);
+		//	pile_del(&a);
+		//	pile_del(&b);
 			return ;
 		}
 		i++;
 	}
 	ft_putendl("OK");
-	pile_del(&a);
-	pile_del(&b);
+//	pile_del(&a);
+//	pile_del(&b);
 }

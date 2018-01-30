@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/30 17:29:05 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:31:24 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,9 @@ void exchange(t_pile *a, int x, int y)
 				}
 				i++;
 			}
-			/*	if (list[x] > list[y])
-				{
-				ft_putendl("sa");
-				swap(a);
-				}*/
 		}
-	//	temp = list[x];
-	//	list[x] = list[y];
-	//	list[y] = temp;
-	//	pile_del(&a);
-		pile_del(&b);
-	//	display(a->num, a->len);
+		//if (b)
+		//	pile_del(&b);
 	}
 }
 
