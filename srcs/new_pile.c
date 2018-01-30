@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/16 11:49:02 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/30 15:34:06 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,12 @@ void			pile_del(t_pile **pile)
 		free(*pile);
 		*pile = 0;
 	}
+}
+
+void display(int *list, int n)
+{
+	int i;
+	for(i=0; i<n; i++)
+		printf("%d\t",list[i]);
+	printf("\n");
 }

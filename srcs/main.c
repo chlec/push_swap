@@ -6,14 +6,14 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/29 14:28:32 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/30 16:00:47 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "push_swap.h"
 
-void exchange(int *list, int x, int y)
+void exchange(int *list, int x, int y, int len)
 {
 	int		temp;
 	int		i;
@@ -21,17 +21,18 @@ void exchange(int *list, int x, int y)
 	int		c;
 	int		abs;
 
-	abs = 0;
+	abs = x - y;
 	if ((x == 0 || x == 1) && (y == 0 || y == 1) && x != y)
 		ft_putendl("sa");
-	else if ((abs = ABS(x - y)) > 0)
+	else if (ABS(x - y) > 0)
 	{
+		abs = ABS(abs);
 		j = x < y ? x : y;
 		i = 0;
 		c = 0;
 		while (i < j)
 		{
-			ft_putendl("rb");
+			ft_putendl("pb");
 			c++;
 			i++;
 		}
@@ -47,74 +48,55 @@ void exchange(int *list, int x, int y)
 		i = 0;
 		while (i < c)
 		{
-			ft_putendl("ra");
+			ft_putendl("pa");
 			i++;
 		}
 	}
-	printf("abs vaut: %d\n", abs);
 	temp = list[x];
 	list[x] = list[y];
 	list[y] = temp;
+	display(list, len);
 }
 
-int choose_pivot(int i, int j)
+void quicksort(t_pile *a, int m, int n)
 {
-	return ((i+j) /2);
-}
+	int		key;
+	int		i;
+	int		j;
+	int		pivot;
 
-void quicksort(int *list, int m, int n)
-{
-	int key;
-	int i;
-	int j;
-	int	k;
-
-	printf("Quicksort function called with params %d and %d\n", m, n);
-	if( m < n)
+	if (m < n)
 	{
-		k = choose_pivot(m,n);
-		printf("On echange index m: %d (contenu %d) avec index k: %d (contenu %d)\n", m, list[m], k, list[k]);
-		exchange(list, m, k);
-		key = list[m];
+		pivot = (m + n) / 2;
+		exchange(a->num, m, pivot, a->len);
+		key = a->num[m];
 		i = m + 1;
 		j = n;
-		while(i <= j)
+		while (i <= j)
 		{
-			while((i <= n) && (list[i] <= key))
+			while ((i <= n) && (a->num[i] <= key))
 				i++;
-			while((j >= m) && (list[j] > key))
+			while ((j >= m) && (a->num[j] > key))
 				j--;
-			if(i < j)
+			if (i < j)
 			{
-				printf("On echange index i: %d (contenu %d) avec index j: %d (contenu %d)\n", i, list[i], j, list[j]);
-				exchange(list, i, j);
+				exchange(a->num, i, j, a->len);
 			}
 		}
-		/* swap two elements */
-		printf("On echange index m: %d (contenu %d) avec index j: %d (contenu %d)\n", m, list[m], j, list[j]);
-		exchange(list, m, j);
-
-		/* recursively sort the lesser list */
-		quicksort(list,m,j-1);
-		quicksort(list,j+1,n);
+		exchange(a->num, m, j, a->len);
+		quicksort(a,m,j-1);
+		quicksort(a,j+1,n);
 	}
-}
-void display(int *list, const int n)
-{
-	int i;
-	for(i=0; i<n; i++)
-		printf("%d\t",list[i]);
-	printf("\n");
 }
 
 void	resolve(t_pile *a, t_pile *b)
 {
 	(void)b;
-	printf("Avant:\n");
-	display(a->num, a->len);
-	quicksort(a->num, 0, a->len - 1);
-	printf("Apres:\n");
-	display(a->num, a->len);
+//	printf("Avant:\n");
+//	display(a->num, a->len);
+	quicksort(a, 0, a->len - 1);
+//	printf("Apres:\n");
+//	display(a->num, a->len);
 }
 
 int		main(int argc, char **argv)
