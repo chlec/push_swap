@@ -6,13 +6,13 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:06:31 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/26 14:06:55 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/29 14:10:39 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
+# define ABS(value) value < 0 ? -value : value
 
 
 #endif
