@@ -6,31 +6,25 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/30 17:06:36 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:29:05 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "push_swap.h"
 
-void exchange(int *list, int x, int y, int len)
+void exchange(t_pile *a, int x, int y)
 {
-	int		temp;
+//	int		temp;
 	int		i;
 	int		j;
 	int		c;
 	int		abs;
-	t_pile	*a;
 	t_pile	*b;
 
 	if (x != y)
 	{
-		a = new_pile(len);
 		b = new_pile(0);
-		i = -1;
-		while (++i < len)
-			a->num[i] = list[i];
-
 		abs = x - y;
 		if ((x == 0 || x == 1) && (y == 0 || y == 1) && x != y)
 		{
@@ -55,18 +49,24 @@ void exchange(int *list, int x, int y, int len)
 			{
 				ft_putendl("sa");
 				swap(a);
-				ft_putendl("pb");
-				push(b, a);
+				if (a->len > 0)
+				{
+					ft_putendl("pb");
+					push(b, a);
+				}
 				c++;
 				i++;
 			}
 			ft_putendl("sa");
+			swap(a);
 			i = 0;
 			while (i < c)
 			{
-				ft_putendl("pa");
-				push(a, b);
-	//			printf("a->len == %d, 0: %d, 1: %d\n", a->len, a->num[0], a->num[1]);
+				if (b->len > 0)
+				{
+					ft_putendl("pa");
+					push(a, b);
+				}
 				if (a->len >= 2 && a->num[0] > a->num[1])
 				{
 					ft_putendl("sa");
@@ -80,12 +80,12 @@ void exchange(int *list, int x, int y, int len)
 				swap(a);
 				}*/
 		}
-		temp = list[x];
-		list[x] = list[y];
-		list[y] = temp;
-		pile_del(&a);
+	//	temp = list[x];
+	//	list[x] = list[y];
+	//	list[y] = temp;
+	//	pile_del(&a);
 		pile_del(&b);
-	//	display(list, len);
+	//	display(a->num, a->len);
 	}
 }
 
@@ -99,7 +99,7 @@ void quicksort(t_pile *a, int m, int n)
 	if (m < n)
 	{
 		pivot = (m + n) / 2;
-		exchange(a->num, m, pivot, a->len);
+		exchange(a, m, pivot);
 		key = a->num[m];
 		i = m + 1;
 		j = n;
@@ -111,10 +111,10 @@ void quicksort(t_pile *a, int m, int n)
 				j--;
 			if (i < j)
 			{
-				exchange(a->num, i, j, a->len);
+				exchange(a, i, j);
 			}
 		}
-		exchange(a->num, m, j, a->len);
+		exchange(a, m, j);
 		quicksort(a,m,j-1);
 		quicksort(a,j+1,n);
 	}
