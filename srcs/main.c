@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/30 17:44:02 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/31 15:26:04 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void exchange(t_pile *a, int x, int y)
 			{
 				ft_putendl("pb");
 				push(b, a);
+				if (b->len >= 2 && b->num[0] < b->num[1])
+				{
+					ft_putendl("sb");
+					swap(b);
+				}
 				c++;
 				i++;
 			}
@@ -57,8 +62,11 @@ void exchange(t_pile *a, int x, int y)
 				c++;
 				i++;
 			}
-			ft_putendl("sa");
-			swap(a);
+			if (a->len >= 2 && a->num[0] > a->num[1])
+			{
+				ft_putendl("sa");
+				swap(a);
+			}
 			i = 0;
 			while (i < c)
 			{

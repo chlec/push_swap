@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:19:30 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/15 17:02:56 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/31 16:57:37 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	rev_rotate(t_pile *pile)
 	int		j;
 
 	temp = pile->num[pile->len - 1];
-	j = pile->len;
+	j = pile->len - 2;
 	while (j >= 0)
 	{
 		pile->num[j + 1] = pile->num[j];
