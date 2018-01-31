@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/31 17:07:38 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:19:55 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void exchange(t_pile *a, int x, int y)
 			j = x < y ? x : y;
 			i = 0;
 			c = 0;
+			if (a->num[a->len - 1] < a->num[a->len - 2])
+			{
+				ft_putendl("rra");
+				rev_rotate(a);
+			}
 			while (i < j)
 			{
 				ft_putendl("pb");
