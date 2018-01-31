@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/31 15:26:04 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:07:38 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void exchange(t_pile *a, int x, int y)
 					ft_putendl("pa");
 					push(a, b);
 				}
-				if (a->len >= 2 && a->num[0] > a->num[1])
+/*				if (a->len >= 2 && a->num[0] > a->num[1])
 				{
 					ft_putendl("sa");
 					swap(a);
-				}
+				}*/
 				i++;
 			}
 		}
