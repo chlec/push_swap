@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/01 14:35:03 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/01 15:01:43 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ void	exchange(t_pile *a, t_pile *b, int x, int y)
 			while (i < j)
 			{
 				//On stock dans pb jusqu'a qu4on tombe sur le num a echanger
-				ft_putendl("ra");
-				rotate(a);
-			//	push(b, a);
+				//Si j > a->len / 2 ---> rra 
+				ft_putendl("pb");
+				push(b, a);
 				//Si les 2 1ers sont dans le desordre de la pile b, on swap
 			/*	if (b->len >= 2 && b->num[0] < b->num[1])
 				{
@@ -119,8 +119,8 @@ void	exchange(t_pile *a, t_pile *b, int x, int y)
 				swap(a);
 				if (a->len > 0)
 				{
-					ft_putendl("ra");
-					rotate(a);
+					ft_putendl("pb");
+					push(b, a);
 				}
 				c++;
 				i++;
@@ -135,13 +135,11 @@ void	exchange(t_pile *a, t_pile *b, int x, int y)
 			//Et on remet les elements de b dans a
 			while (i < c)
 			{
-				//if (b->len > 0)
-				//{
-			//		ft_putendl("pa");		
-			//		push(a, b);
-			//	}
-				ft_putendl("rra");
-				rev_rotate(a);
+				if (b->len > 0)
+				{
+					ft_putendl("pa");
+					push(a, b);
+				}
 				i++;
 			}
 		}
