@@ -6,26 +6,74 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/01 11:36:37 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/01 14:35:03 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "push_swap.h"
 
-void exchange(t_pile *a, int x, int y)
+void	tri_facile(t_pile *a, t_pile *b)
+{
+	int		i;
+
+	if (a->len > 1)
+	{
+		if (a->num[a->len - 1] < a->num[a->len - 2])
+		{
+			ft_putendl("rra");
+			rev_rotate(a);
+		}
+		if (a->num[0] > a->num[1])
+		{
+			ft_putendl("sa");
+			swap(a);
+		}
+		i = 0;
+		while (i < a->len)
+		{
+			if (a->num[0] > a->num[1])
+			{
+				ft_putendl("sa");
+				swap(a);
+			}
+			if (a->len >= 2)
+			{
+				ft_putendl("pb");
+				push(b, a);
+			}
+			if (a->len >= 2 && a->num[0] > a->num[1])
+			{
+				ft_putendl("sa");
+				swap(a);
+			//	break;
+			}
+			i++;
+		}
+		i = 0;
+		while (i < b->len)
+		{
+			ft_putendl("pa");
+			push(a, b);
+			if (a->num[0] > a->num[1])
+			{
+				ft_putendl("sa");
+				swap(a);
+			}
+		}
+	}
+}
+
+void	exchange(t_pile *a, t_pile *b, int x, int y)
 {
 	int		i;
 	int		j;
 	int		c;
 	int		abs;
-	t_pile	*b;
 
 	if (x != y)
 	{
-		printf("on change index x: %d et y: %d\n", x, y);
-		b = new_pile(a->len);
-		b->len = 0;
+		//printf("on change index x: %d et y: %d\n", x, y);
 		//Si deja dqns l'ordre on retourne
 		if (check_valid(a, b))
 			return ;
@@ -43,22 +91,23 @@ void exchange(t_pile *a, int x, int y)
 			i = 0;
 			c = 0;
 			//Si le dernier est plus petit que le 1er on decale la liste vers la droite
-			if (a->num[a->len - 1] < a->num[a->len - 2])
-			{
+			/*	if (a->num[a->len - 1] < a->num[a->len - 2])
+				{
 				ft_putendl("rra");
 				rev_rotate(a);
-			}
+				}*/
 			while (i < j)
 			{
 				//On stock dans pb jusqu'a qu4on tombe sur le num a echanger
-				ft_putendl("pb");
-				push(b, a);
+				ft_putendl("ra");
+				rotate(a);
+			//	push(b, a);
 				//Si les 2 1ers sont dans le desordre de la pile b, on swap
-				if (b->len >= 2 && b->num[0] < b->num[1])
+			/*	if (b->len >= 2 && b->num[0] < b->num[1])
 				{
 					ft_putendl("sb");
 					swap(b);
-				}
+				}*/
 				c++;
 				i++;
 			}
@@ -70,8 +119,8 @@ void exchange(t_pile *a, int x, int y)
 				swap(a);
 				if (a->len > 0)
 				{
-					ft_putendl("pb");
-					push(b, a);
+					ft_putendl("ra");
+					rotate(a);
 				}
 				c++;
 				i++;
@@ -86,20 +135,20 @@ void exchange(t_pile *a, int x, int y)
 			//Et on remet les elements de b dans a
 			while (i < c)
 			{
-				if (b->len > 0)
-				{
-					ft_putendl("pa");
-					push(a, b);
-				}
+				//if (b->len > 0)
+				//{
+			//		ft_putendl("pa");		
+			//		push(a, b);
+			//	}
+				ft_putendl("rra");
+				rev_rotate(a);
 				i++;
 			}
 		}
-		if (b)
-			pile_del(&b);
 	}
 }
 
-void quicksort(t_pile *a, int m, int n)
+void quicksort(t_pile *a, t_pile *b,  int m, int n)
 {
 	int		key;
 	int		i;
@@ -109,7 +158,7 @@ void quicksort(t_pile *a, int m, int n)
 	if (m < n)
 	{
 		pivot = (m + n) / 2;
-		exchange(a, m, pivot);
+		exchange(a, b, m, pivot);
 		key = a->num[m];
 		i = m + 1;
 		j = n;
@@ -121,28 +170,34 @@ void quicksort(t_pile *a, int m, int n)
 				j--;
 			if (i < j)
 			{
-				exchange(a, i, j);
+				exchange(a, b, i, j);
 			}
 		}
-		exchange(a, m, j);
-		quicksort(a,m,j-1);
-		quicksort(a,j+1,n);
+		exchange(a, b, m, j);
+		quicksort(a, b, m, j - 1);
+		quicksort(a, b, j + 1, n);
 	}
 }
 
-void	resolve(t_pile *a)
+void	resolve(t_pile *a, t_pile *b)
 {
-	quicksort(a, 0, a->len - 1);
+	if (a->len > 0)
+		quicksort(a, b, 0, a->len - 1);
+	else
+		tri_facile(a, b);
 }
 
 int		main(int argc, char **argv)
 {
 	int		i;
 	t_pile	*a;
+	t_pile	*b;
 
 	if (argc > 2)
 	{
 		a = new_pile(argc - 1);
+		b = new_pile(argc - 1);
+		b->len = 0;
 		i = 1;
 		while (i < argc)
 		{
@@ -154,8 +209,9 @@ int		main(int argc, char **argv)
 			a->num[i - 1] = ft_atoi(argv[i]);
 			i++;
 		}
-		resolve(a);
+		resolve(a, b);
 		pile_del(&a);
+		pile_del(&b);
 	}
 	return (0);
 }
