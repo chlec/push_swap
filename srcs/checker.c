@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/30 17:49:58 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/01 11:22:27 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ int			main(int argc, char **argv)
 		return (0);
 	}
 	a->len = handle_ops(ops, a, b);
-	check_valid(a, b);
+	if (check_valid(a, b))
+		ft_putendl("OK");
+	else
+		ft_putendl("KO");
+	pile_del(&a);
+	pile_del(&b);
 	return (0);
 }

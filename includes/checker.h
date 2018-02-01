@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/30 15:32:50 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/01 11:21:00 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			swap(t_pile *pile);
 void			push(t_pile *a, t_pile *b);
 void			rotate(t_pile *pile);
 void			rev_rotate(t_pile *pile);
-void			check_valid(t_pile *a, t_pile *b);
+int				check_valid(t_pile *a, t_pile *b);
 int				valid_ops(char **ops);
 void			pile_del(t_pile **pile);
 void			display(int *list, int n);

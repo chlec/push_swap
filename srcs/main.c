@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/31 17:19:55 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/01 11:36:37 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,15 @@ void exchange(t_pile *a, int x, int y)
 
 	if (x != y)
 	{
+		printf("on change index x: %d et y: %d\n", x, y);
 		b = new_pile(a->len);
 		b->len = 0;
+		//Si deja dqns l'ordre on retourne
+		if (check_valid(a, b))
+			return ;
 		abs = x - y;
-		if ((x == 0 || x == 1) && (y == 0 || y == 1) && x != y)
+		//Si on doit echanger les 2 1er on le fait
+		if ((x == 0 || x == 1) && (y == 0 || y == 1))
 		{
 			ft_putendl("sa");
 			swap(a);	
@@ -37,6 +42,7 @@ void exchange(t_pile *a, int x, int y)
 			j = x < y ? x : y;
 			i = 0;
 			c = 0;
+			//Si le dernier est plus petit que le 1er on decale la liste vers la droite
 			if (a->num[a->len - 1] < a->num[a->len - 2])
 			{
 				ft_putendl("rra");
@@ -44,8 +50,10 @@ void exchange(t_pile *a, int x, int y)
 			}
 			while (i < j)
 			{
+				//On stock dans pb jusqu'a qu4on tombe sur le num a echanger
 				ft_putendl("pb");
 				push(b, a);
+				//Si les 2 1ers sont dans le desordre de la pile b, on swap
 				if (b->len >= 2 && b->num[0] < b->num[1])
 				{
 					ft_putendl("sb");
@@ -57,6 +65,7 @@ void exchange(t_pile *a, int x, int y)
 			i = 0;
 			while (i < abs - 1)
 			{
+				//On echange les 2 1ers puis on met ensuite le 1er dans b jusqu'a que les 2 chiffres sont cote a cote
 				ft_putendl("sa");
 				swap(a);
 				if (a->len > 0)
@@ -67,12 +76,14 @@ void exchange(t_pile *a, int x, int y)
 				c++;
 				i++;
 			}
+			//Une fois colle, on les swap
 			if (a->len >= 2 && a->num[0] > a->num[1])
 			{
 				ft_putendl("sa");
 				swap(a);
 			}
 			i = 0;
+			//Et on remet les elements de b dans a
 			while (i < c)
 			{
 				if (b->len > 0)
@@ -80,11 +91,6 @@ void exchange(t_pile *a, int x, int y)
 					ft_putendl("pa");
 					push(a, b);
 				}
-/*				if (a->len >= 2 && a->num[0] > a->num[1])
-				{
-					ft_putendl("sa");
-					swap(a);
-				}*/
 				i++;
 			}
 		}
