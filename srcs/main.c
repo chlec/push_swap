@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/01 15:01:43 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/01 15:06:39 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	tri_facile(t_pile *a, t_pile *b)
 			{
 				ft_putendl("sa");
 				swap(a);
-			//	break;
 			}
 			i++;
 		}
@@ -96,20 +95,21 @@ void	exchange(t_pile *a, t_pile *b, int x, int y)
 				ft_putendl("rra");
 				rev_rotate(a);
 				}*/
-			while (i < j)
+			//On stock dans pb jusqu'a qu4on tombe sur le num a echanger
+			//Si j > a->len / 2 ---> rra
+			if (j > a->len / 2)
 			{
-				//On stock dans pb jusqu'a qu4on tombe sur le num a echanger
-				//Si j > a->len / 2 ---> rra 
-				ft_putendl("pb");
-				push(b, a);
-				//Si les 2 1ers sont dans le desordre de la pile b, on swap
-			/*	if (b->len >= 2 && b->num[0] < b->num[1])
+
+			}
+			else
+			{
+				while (i < j)
 				{
-					ft_putendl("sb");
-					swap(b);
-				}*/
-				c++;
-				i++;
+					ft_putendl("pb");
+					push(b, a);
+					c++;
+					i++;
+				}
 			}
 			i = 0;
 			while (i < abs - 1)
