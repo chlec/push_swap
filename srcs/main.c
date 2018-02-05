@@ -13,7 +13,7 @@
 #include "checker.h"
 #include "push_swap.h"
 
-void	tri_facile2(t_pile *a, t_pile *b)
+void	tri_facile(t_pile *a, t_pile *b)
 {
 	int		i;
 	int		c;
@@ -56,7 +56,7 @@ void	tri_facile2(t_pile *a, t_pile *b)
 						return ;
 					c--;
 				}
-				tri_facile2(a, b);
+				tri_facile(a, b);
 				return ;
 			}
 			i--;
@@ -81,60 +81,10 @@ void	tri_facile2(t_pile *a, t_pile *b)
 					push(a, b);
 					c--;
 				}
-				tri_facile2(a, b);
+				tri_facile(a, b);
 				return ;
 			}
 			i++;
-		}
-	}
-}
-
-void	tri_facile(t_pile *a, t_pile *b)
-{
-	int		i;
-
-	if (a->len > 1)
-	{
-		if (a->num[a->len - 1] < a->num[a->len - 2])
-		{
-			ft_putendl("rra");
-			rev_rotate(a);
-		}
-		if (a->num[0] > a->num[1])
-		{
-			ft_putendl("sa");
-			swap(a);
-		}
-		i = 0;
-		while (i < a->len)
-		{
-			if (a->num[0] > a->num[1])
-			{
-				ft_putendl("sa");
-				swap(a);
-			}
-			if (a->len >= 2)
-			{
-				ft_putendl("pb");
-				push(b, a);
-			}
-			if (a->len >= 2 && a->num[0] > a->num[1])
-			{
-				ft_putendl("sa");
-				swap(a);
-			}
-			i++;
-		}
-		i = 0;
-		while (i < b->len)
-		{
-			ft_putendl("pa");
-			push(a, b);
-			if (a->num[0] > a->num[1])
-			{
-				ft_putendl("sa");
-				swap(a);
-			}
 		}
 	}
 }
@@ -277,7 +227,7 @@ void	resolve(t_pile *a, t_pile *b)
 	if (a->len > 20)
 		quicksort(a, b, 0, a->len - 1);
 	else
-		tri_facile2(a, b);
+		tri_facile(a, b);
 }
 
 int		main(int argc, char **argv)
