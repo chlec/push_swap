@@ -274,7 +274,7 @@ void quicksort(t_pile *a, t_pile *b,  int m, int n)
 
 void	resolve(t_pile *a, t_pile *b)
 {
-	if (a->len > 11)
+	if (a->len > 20)
 		quicksort(a, b, 0, a->len - 1);
 	else
 		tri_facile2(a, b);
