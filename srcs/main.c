@@ -13,6 +13,82 @@
 #include "checker.h"
 #include "push_swap.h"
 
+void	tri_facile2(t_pile *a, t_pile *b)
+{
+	int		i;
+	int		c;
+	int		temp;
+
+	if (a->len > 1 && !check_valid(a, b))
+	{
+		if (a->num[0] > a->num[1])
+		{
+			ft_putendl("sa");
+			swap(a);
+			if (check_valid(a, b))
+				return ;
+		}
+		i = a->len - 1;
+		while (i > 0 && i >= a->len / 2)
+		{
+			//Ex 3 2 1 0        -> Si 0 est < a 1, on rra 2 fois
+			if (a->num[i] < a->num[i - 1])
+			{
+				temp = a->num[i - 1];
+				c = 0;
+				while (a->num[0] != temp)
+				{
+					ft_putendl("rra");
+					rev_rotate(a);
+					if (check_valid(a, b))
+						return ;
+					c++;
+				}
+				ft_putendl("sa");
+				swap(a);
+				if (check_valid(a, b))
+					return ;
+				while (c > 0)
+				{
+					ft_putendl("ra");
+					rotate(a);
+					if (check_valid(a, b))
+						return ;
+					c--;
+				}
+				tri_facile2(a, b);
+				return ;
+			}
+			i--;
+		}
+		i = 0;
+		while (i < a->len - 1)
+		{
+			if (a->num[i] > a->num[i + 1])
+			{
+				c = 0;
+				while (c < i)
+				{
+					ft_putendl("pb");
+					push(b, a);
+					c++;
+				}
+				ft_putendl("sa");
+				swap(a);
+				while (c > 0)
+				{
+					ft_putendl("pa");
+					push(a, b);
+					c--;
+				}
+				tri_facile2(a, b);
+				return ;
+			}
+			i++;
+		}
+	}
+}
+
 void	tri_facile(t_pile *a, t_pile *b)
 {
 	int		i;
@@ -69,6 +145,7 @@ void	exchange(t_pile *a, t_pile *b, int x, int y)
 	int		j;
 	int		c;
 	int		abs;
+	int		temp;
 
 	if (x != y)
 	{
@@ -99,7 +176,13 @@ void	exchange(t_pile *a, t_pile *b, int x, int y)
 			//Si j > a->len / 2 ---> rra
 			if (j > a->len / 2)
 			{
-
+				temp = a->num[j];
+				while (a->num[0] != temp)
+				{
+					ft_putendl("rra");
+					rev_rotate(a);
+					c++;
+				}
 			}
 			else
 			{
@@ -133,14 +216,26 @@ void	exchange(t_pile *a, t_pile *b, int x, int y)
 			}
 			i = 0;
 			//Et on remet les elements de b dans a
-			while (i < c)
+			if (b->len > 0)
 			{
-				if (b->len > 0)
+				while (i < c)
 				{
-					ft_putendl("pa");
-					push(a, b);
+					if (b->len > 0)
+					{
+						ft_putendl("pa");
+						push(a, b);
+					}
+					i++;
 				}
-				i++;
+			}
+			else
+			{
+				while (i < c)
+				{
+					ft_putendl("ra");
+					rotate(a);
+					i++;
+				}
 			}
 		}
 	}
@@ -179,10 +274,10 @@ void quicksort(t_pile *a, t_pile *b,  int m, int n)
 
 void	resolve(t_pile *a, t_pile *b)
 {
-	if (a->len > 0)
+	if (a->len > 11)
 		quicksort(a, b, 0, a->len - 1);
 	else
-		tri_facile(a, b);
+		tri_facile2(a, b);
 }
 
 int		main(int argc, char **argv)
