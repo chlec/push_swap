@@ -59,7 +59,7 @@ static void	exchange(t_pile *a, t_pile *b, int x, int y)
 					ft_putendl("rra");
 					rev_rotate(a);
 					i++;
-					if (a->num[0] != temp)
+					if (a->num[0] != temp && a->len > 0)
 					{
 						ft_putendl("pb");
 						push(b, a);
@@ -71,8 +71,46 @@ static void	exchange(t_pile *a, t_pile *b, int x, int y)
 				{
 					ft_putendl("ra");
 					rotate(a);
+					if (b->len > 0)
+					{
+						ft_putendl("pa");
+						push(a, b);
+					}
+					i--;
+				}
+				while (c > 0 && b->len > 0)
+				{
 					ft_putendl("pa");
 					push(a, b);
+					c--;
+				}
+			}
+			else
+			{
+				c = 0;
+				while (c < little)
+				{
+					ft_putendl("pb");
+					push(b, a);
+					c++;
+				}
+				i = 1;
+				while (i < diff)
+				{
+					ft_putendl("sa");
+					swap(a);
+					ft_putendl("pb");
+					push(b, a);
+					i++;
+				}
+				ft_putendl("sa");
+				swap(a);
+				while (i > 1)
+				{
+					ft_putendl("pa");
+					push(a, b);
+					ft_putendl("sa");
+					swap(a);
 					i--;
 				}
 				while (c > 0)
@@ -86,7 +124,7 @@ static void	exchange(t_pile *a, t_pile *b, int x, int y)
 	}
 }
 
-void 		quicksort(t_pile *a, t_pile *b,  int start, int end)
+void 		quicksort(t_pile *a, t_pile *b, int start, int end)
 {
 	int		pivot;
 	int		left;
