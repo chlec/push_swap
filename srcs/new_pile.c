@@ -39,7 +39,13 @@ void			pile_del(t_pile **pile)
 
 void display(int *list, int n)
 {
-	int i;
-	for(i=0; i<n; i++)
-		printf("%d\t",list[i]);
+	int		i;
+
+	i = 0;
+	while (i < n) {
+		ft_putnbr(list[i]);
+		ft_putchar('\t');
+		i++;
+	}
+	ft_putchar('\n');
 }

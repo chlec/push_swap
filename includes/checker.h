@@ -34,5 +34,8 @@ int				check_valid(t_pile *a, t_pile *b);
 int				valid_ops(char **ops);
 void			pile_del(t_pile **pile);
 void			display(int *list, int n);
+void 			quicksort(t_pile *a, t_pile *b,  int start, int end);
+void			short_sort(t_pile *a, t_pile *b);
+int				check_stack(t_pile *pile);
 
 #endif

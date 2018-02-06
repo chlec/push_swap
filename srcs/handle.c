@@ -100,9 +100,9 @@ int		handle_ops(char **ops, t_pile *a, t_pile *b)
 			if (!(check_push(a, b, ops[i])))
 				if (!check_rev_rotate(a, b, ops[i]))
 					check_rotate(a, b, ops[i]);
-		printf("%s: a:\t", ops[i]);
+		ft_putstr(ops[i]);
+		ft_putstr(": a:\t");
 		display(a->num, a->len);
-		printf("\n");
 		ft_strdel(&ops[i]);
 		i++;
 	}

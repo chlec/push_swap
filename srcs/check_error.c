@@ -74,3 +74,17 @@ int		check_valid(t_pile *a, t_pile *b)
 	}
 	return (1);
 }
+
+int		check_stack(t_pile *pile)
+{
+	int		i;
+
+	i = 0;
+	while (i < pile->len)
+	{
+		if (pile->num[i] > pile->num[i + 1] && i < pile->len - 1)
+			return (0);
+		i++;
+	}
+	return (1);
+}

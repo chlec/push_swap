@@ -27,7 +27,9 @@ SRCS_CHECKER =	$(PATH_SRCS)checker.c \
 SRCS_PUSH_SWAP =	$(PATH_SRCS)main.c \
 	   				$(PATH_SRCS)check_error.c \
 					$(PATH_SRCS)new_pile.c \
-					$(PATH_SRCS)op.c
+					$(PATH_SRCS)op.c \
+					$(PATH_SRCS)quicksort.c \
+					$(PATH_SRCS)short_sort.c
 
 OBJS_CHECKER = $(SRCS_CHECKER:.c=.o)
 
@@ -39,7 +41,7 @@ OBJS_PUSH_SWAP_FILTERED = $(notdir $(OBJS_PUSH_SWAP))
 
 LIB_OBJS = libft/*.o
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = #-Wall -Werror -Wextra
 
 all: $(NAME_1) $(NAME_2)
 
