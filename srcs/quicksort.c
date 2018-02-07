@@ -124,7 +124,7 @@ void		autre_tri(t_pile *a, t_pile *b)
 				push(b, a);
 			}
 		}
-		else
+		else if (is_in_stack(b, lower))
 		{
 			while (b->num[0] != lower)
 			{
