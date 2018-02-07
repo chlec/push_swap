@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/01 11:21:00 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/07 13:04:47 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,32 +124,60 @@ static void	exchange(t_pile *a, t_pile *b, int x, int y)
 	}
 }
 
-void 		quicksort(t_pile *a, t_pile *b, int start, int end)
+int		get_pivot(t_pile *pile)
 {
+	int		i;
+	int		j;
 	int		pivot;
 	int		left;
 	int		right;
 
-	left = start - 1;
-	right = end + 1;
-	pivot = a->num[start];
-	if (start >= end)
-		return ;
-	while (1)
+	i = 0;
+	left = 0;
+	right = 1;
+	while (i < pile->len && left != right)
 	{
-		right--;
-		while (a->num[right] > pivot)
-			right--;
-		left++;
-		while (a->num[left] < pivot)
-			left++;
-		if (left < right)
-			exchange(a, b, left, right);
-		else
-			break ;
+		left = !(pile->len % 2);
+		right = 0;
+		pivot = pile->num[i];
+		j = 0;
+		while (j < pile->len)
+		{
+			if (pivot < pile->num[j])
+				right++;
+			if (pivot > pile->num[j])
+				left++;
+			j++;
+		}
+		i++;
 	}
-	//on traite la partie de gauche
-	quicksort(a, b, start, right);
-	//on traite la partir de droite
-    quicksort(a, b, right+1, end);
+	return (pivot);
+}
+
+void 		quicksort(t_pile *a, t_pile *b, int start, int end)
+{
+	int		pivot;
+	int		i;
+	int		len;
+
+	i = 0;
+	len = a->len;
+	pivot = get_pivot(a);
+	printf("le pivot vaut %d\n", pivot);
+	while (i < a->len)
+	{
+		if (a->num[i] < pivot)
+		{
+			ft_putendl("pb");
+			push(b, a);
+			i = -1;
+		}
+		else// (a->num[i] > pivot)
+		{
+			ft_putendl("ra");
+			rotate(a);
+		}
+		i++;
+	}
+	display(a->num, a->len);
 }
