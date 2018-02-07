@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/07 13:04:47 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/07 13:24:04 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ int		get_pivot(t_pile *pile)
 	right = 1;
 	while (i < pile->len && left != right)
 	{
-		left = !(pile->len % 2);
-		right = 0;
+		right = !(pile->len % 2);
+		left = 0;
 		pivot = pile->num[i];
 		j = 0;
 		while (j < pile->len)
@@ -163,21 +163,31 @@ void 		quicksort(t_pile *a, t_pile *b, int start, int end)
 	i = 0;
 	len = a->len;
 	pivot = get_pivot(a);
-	printf("le pivot vaut %d\n", pivot);
-	while (i < a->len)
+//	printf("le pivot est %d\n", pivot);
+	if (check_stack(a))
 	{
-		if (a->num[i] < pivot)
+		short_sort(a, b);
+		return ;
+	}
+	while (i < len)
+	{
+		if (a->num[0] < pivot)
 		{
 			ft_putendl("pb");
 			push(b, a);
-			i = -1;
 		}
 		else// (a->num[i] > pivot)
 		{
 			ft_putendl("ra");
 			rotate(a);
 		}
+	//	usleep(300000);
+/*		ft_putstr("a: \t");
+		display(a->num, a->len);
+		ft_putstr("b: \t");
+		display(b->num, b->len);*/
 		i++;
 	}
-	display(a->num, a->len);
+	quicksort(a, b, 0, 0);
+//	display(a->num, a->len);
 }

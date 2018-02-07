@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/01 15:06:39 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/07 13:39:11 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	resolve(t_pile *a, t_pile *b)
 {
-	if (a->len >= -1)
+	if (a->len >= 8)
 		quicksort(a, b, 0, a->len - 1);
 	else
 		short_sort(a, b);
