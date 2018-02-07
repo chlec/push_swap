@@ -20,7 +20,6 @@ typedef struct	s_pile
 {
 	int		*num;
 	int		len;
-	int		sorted;
 }				t_pile;
 
 int				handle_ops(char *op, t_pile *a, t_pile *b);
@@ -35,7 +34,7 @@ int				check_valid(t_pile *a, t_pile *b);
 int				valid_ops(char *op);
 void			pile_del(t_pile **pile);
 void			display(int *list, int n);
-void 			quicksort(t_pile *a, t_pile *b,  int start, int end);
+void 			quicksort(t_pile *a, t_pile *b);
 void			short_sort(t_pile *a, t_pile *b);
 int				check_stack(t_pile *pile);
 

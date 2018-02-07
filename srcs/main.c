@@ -16,7 +16,7 @@
 void	resolve(t_pile *a, t_pile *b)
 {
 	if (a->len >= 8)
-		quicksort(a, b, 0, a->len - 1);
+		quicksort(a, b);
 	else
 		short_sort(a, b);
 }

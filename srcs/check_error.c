@@ -49,6 +49,7 @@ int		has_double(char *str, int *num, int len)
 int		valid_ops(char *op)
 {
 	//sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr
+	(void)op;
 	return (1);
 }
 

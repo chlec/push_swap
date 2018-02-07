@@ -41,7 +41,7 @@ OBJS_PUSH_SWAP_FILTERED = $(notdir $(OBJS_PUSH_SWAP))
 
 LIB_OBJS = libft/*.o
 
-FLAGS = #-Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME_1) $(NAME_2)
 

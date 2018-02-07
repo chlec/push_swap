@@ -23,7 +23,6 @@ t_pile	*new_pile(int len)
 		pile->num = (int*)malloc(sizeof(int) * len);
 	else
 		pile->num = 0;
-	pile->sorted = len;
 	return (pile);
 }
 
