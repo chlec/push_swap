@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/07 13:41:00 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/07 15:54:29 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	short_sort(t_pile *a, t_pile *b)
 			ft_putendl("pa");
 			push(a, b);	
 		}
-		else if ((a->num[0] < a->num[1]) && (b->len == 0 || a->num[0] >b->num[0]))
+		else if ((a->num[0] < a->num[1]) && (b->len == 0 || a->num[0] > b->num[0]))
 		{
 			ft_putendl("pb");
 			push(b, a);

@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/07 13:24:04 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/07 17:52:10 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,125 @@ int		get_pivot(t_pile *pile)
 	return (pivot);
 }
 
+void		autre_tri(t_pile *a, t_pile *b)
+{
+	int		i;
+	int		j;
+	int		num;
+	int		temp;
+	int		lower;
+	int		pivot;
+
+	//En gros on prend le 1er nombre, si on trouve plus petit on le met dans b et on refait
+	//Sinon on le met a la fin
+	num = 0;
+	pivot = get_pivot(a);
+	while (a->num[a->len - 1] != pivot)
+	{
+		temp = 0;
+		lower = a->num[0];
+		//	usleep(300000);
+	/*	ft_putstr("a: \t");
+		display(a->num, a->len);
+		ft_putstr("b: \t");
+		display(b->num, b->len);*/
+		i = 0;
+		while (i < a->len)
+		{
+			if (a->num[i] < lower && a->num[i] > num)
+			{
+				lower = a->num[i];
+				temp = 1;
+			}
+			i++;
+		}
+		while (temp == 1 && a->num[0] != lower)
+		{
+			ft_putendl("pb");
+			push(b, a);
+		}
+		j = 0;
+		temp = 0;
+		while (j < b->len)
+		{
+			if (b->num[j] < lower && b->num[j] > num)
+			{
+				temp = 1;
+				lower = b->num[j];
+			}
+			j++;
+
+		}
+		if (temp == 1)
+		{
+			while (b->num[0] != lower)
+			{
+				ft_putendl("rb");
+				rotate(b);
+			}
+			ft_putendl("pa");
+			push(a, b);
+		}
+		while (a->num[a->len - 1] != lower)
+		{
+			ft_putendl("ra");
+			rotate(a);
+		}
+		num = lower;
+	}
+	while (b->len > 0)
+	{
+		ft_putendl("pa");
+		push(a, b);
+	}
+	/*ft_putstr("a: \t");
+	display(a->num, a->len);
+	ft_putstr("b: \t");
+	display(b->num, b->len);*/
+
+}
+
+void 		quick2(t_pile *a, t_pile *b, int start, int end)
+{
+	int		pivot;
+	int		i;
+	int		len;
+
+	i = 0;
+	len = b->len;
+	pivot = get_pivot(b);
+	if (b->len == 2)
+	{
+		if (b->num[0] < b->num[1])
+		{
+			ft_putendl("sb");
+			swap(b);
+		}
+		ft_putendl("pa");
+		push(a, b);
+		ft_putendl("pa");
+		push(a, b);
+		autre_tri(a, b);
+		//		short_sort(a, b);
+		return ;
+	}
+	while (i < len)
+	{
+		if (b->num[0] > pivot)
+		{
+			ft_putendl("pa");
+			push(a, b);
+		}
+		else
+		{
+			ft_putendl("rb");
+			rotate(b);
+		}
+		i++;
+	}
+	quick2(a, b, 0, 0);
+}
+
 void 		quicksort(t_pile *a, t_pile *b, int start, int end)
 {
 	int		pivot;
@@ -163,7 +282,6 @@ void 		quicksort(t_pile *a, t_pile *b, int start, int end)
 	i = 0;
 	len = a->len;
 	pivot = get_pivot(a);
-//	printf("le pivot est %d\n", pivot);
 	if (check_stack(a))
 	{
 		short_sort(a, b);
@@ -176,18 +294,12 @@ void 		quicksort(t_pile *a, t_pile *b, int start, int end)
 			ft_putendl("pb");
 			push(b, a);
 		}
-		else// (a->num[i] > pivot)
+		else
 		{
 			ft_putendl("ra");
 			rotate(a);
 		}
-	//	usleep(300000);
-/*		ft_putstr("a: \t");
-		display(a->num, a->len);
-		ft_putstr("b: \t");
-		display(b->num, b->len);*/
 		i++;
 	}
-	quicksort(a, b, 0, 0);
-//	display(a->num, a->len);
+	quick2(a, b, 0, 0);
 }

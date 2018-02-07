@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/07 14:33:43 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/07 16:41:49 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct	s_pile
 {
 	int		*num;
 	int		len;
+	int		sorted;
 }				t_pile;
 
 int				handle_ops(char *op, t_pile *a, t_pile *b);
