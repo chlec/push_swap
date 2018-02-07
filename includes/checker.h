@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/01 11:21:00 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/07 14:33:43 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct	s_pile
 	int		len;
 }				t_pile;
 
-int				handle_ops(char **ops, t_pile *a, t_pile *b);
+int				handle_ops(char *op, t_pile *a, t_pile *b);
 int				only_number(char *str);
 int				has_double(char *str, int *num, int len);
 t_pile			*new_pile(int len);
@@ -31,7 +31,7 @@ void			push(t_pile *a, t_pile *b);
 void			rotate(t_pile *pile);
 void			rev_rotate(t_pile *pile);
 int				check_valid(t_pile *a, t_pile *b);
-int				valid_ops(char **ops);
+int				valid_ops(char *op);
 void			pile_del(t_pile **pile);
 void			display(int *list, int n);
 void 			quicksort(t_pile *a, t_pile *b,  int start, int end);

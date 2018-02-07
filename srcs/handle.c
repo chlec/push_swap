@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:19:30 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/31 16:56:42 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/07 14:37:30 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	check_swap(t_pile *a, t_pile *b, char *op)
 	}
 	return (0);
 }
+
 static int	check_push(t_pile *a, t_pile *b, char *op)
 {
 	if (ft_strequ(op, "pa") && b->len > 0)
@@ -89,25 +90,15 @@ static int	check_rev_rotate(t_pile *a, t_pile *b, char *op)
 	return (0);
 }
 
-int		handle_ops(char **ops, t_pile *a, t_pile *b)
+int		handle_ops(char *op, t_pile *a, t_pile *b)
 {
-	int		i;
-
-	i = 0;
-	while (ops[i])
-	{
-		if (!(check_swap(a, b, ops[i])))
-			if (!(check_push(a, b, ops[i])))
-				if (!check_rev_rotate(a, b, ops[i]))
-					check_rotate(a, b, ops[i]);
-		ft_putstr(ops[i]);
-		ft_putstr(": a:\t");
-		display(a->num, a->len);
-		ft_strdel(&ops[i]);
-		i++;
-	}
-	ft_strdel(&ops[i]);
-	free(ops);
-	ops = 0;
+	if (!(check_swap(a, b, op)))
+		if (!(check_push(a, b, op)))
+			if (!check_rev_rotate(a, b, op))
+				check_rotate(a, b, op);
+	ft_putstr(op);
+	ft_putstr(": a:\t");
+	display(a->num, a->len);
+	//ft_strdel(&op);
 	return (a->len);
 }
