@@ -6,14 +6,50 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/08 13:55:56 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/08 16:24:32 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "push_swap.h"
 
-int		get_pivot(t_pile *pile)
+int		get_pivot_sort(t_pile *a, t_pile *b)
+{
+	int		i;
+	int		j;
+	int		pivot;
+	int		left;
+	int		right;
+	int		total;
+
+	total = b->len;
+	while (b->len != 0)
+		push(a, b);
+	left = 0;
+	right = 1;
+	i = 0;
+	while (i < a->len - a->sorted - 1 && left != right)
+	{
+		right = !(a->len - a->sorted % 2);
+		left = 0;
+		pivot = a->num[i];
+		j = 0;
+		while (j < a->len - a->sorted)
+		{
+			if (pivot < a->num[j])
+				right++;
+			if (pivot > a->num[j])
+				left++;
+			j++;
+		}
+		i++;
+	}
+	while (b->len < total)
+		push(b, a);
+	return (pivot);
+}
+
+int		get_pivot(t_pile *a)
 {
 	int		i;
 	int		j;
@@ -24,17 +60,17 @@ int		get_pivot(t_pile *pile)
 	i = 0;
 	left = 0;
 	right = 1;
-	while (i < pile->len && left != right)
+	while (left != right)
 	{
-		right = !(pile->len % 2);
+		right = !(a->len % 2);
 		left = 0;
-		pivot = pile->num[i];
+		pivot = a->num[i];
 		j = 0;
-		while (j < pile->len)
+		while (j < a->len)
 		{
-			if (pivot < pile->num[j])
+			if (pivot < a->num[j])
 				right++;
-			if (pivot > pile->num[j])
+			if (pivot > a->num[j])
 				left++;
 			j++;
 		}
@@ -42,23 +78,6 @@ int		get_pivot(t_pile *pile)
 	}
 	return (pivot);
 }
-
-/*int			lower_stack(t_pile *a)
-{
-	int		i;
-	int		lower;
-
-	lower = a->len[0];
-	i = 0;
-	while (i < a->len)
-	{
-		if (a->num[i] < lower && a->num[i] > num)
-		{
-			lower = a->num[i];
-		}
-		i++;
-	}
-}*/
 
 int			is_in_stack(t_pile *pile, int num)
 {
@@ -72,6 +91,29 @@ int			is_in_stack(t_pile *pile, int num)
 		i++;
 	}
 	return (0);
+}
+
+int			lowest_num(t_pile *a, t_pile *b)
+{
+	int		best;
+	int		i;
+
+	best = a->num[0];
+	i = 0;
+	while (i < b->len)
+	{
+		if (b->num[i] < best)
+			best = b->num[i];
+		i++;
+	}
+	i = 0;
+	while (i < a->len)
+	{
+		if (a->num[i] < best)
+			best = a->num[i];
+		i++;
+	}
+	return (best);
 }
 
 int			higher(t_pile *a, t_pile *b)
@@ -111,7 +153,7 @@ int			get_index(t_pile *pile, int num)
 	return (0);
 }
 
-void		autre_tri(t_pile *a, t_pile *b, int end)
+void		autre_tri(t_pile *a, t_pile *b)
 {
 	int		i;
 	int		j;
@@ -123,15 +165,11 @@ void		autre_tri(t_pile *a, t_pile *b, int end)
 	//En gros on prend le 1er nombre, si on trouve plus petit on le met dans b et on refait
 	//Sinon on le met a la fin
 	num = 0;
-	pivot = get_pivot(a);
-	first = 0;
-	while (a->num[a->len - 1] != end)
+	pivot = get_pivot_sort(a, b);
+	first = lowest_num(a, b);
+	while (a->num[a->len - 1] != pivot)
 	{
-		lower = a->num[0] != 0 ? a->num[0] : higher(a, b);
-	/*	ft_putstr("a: \t");
-		display(a->num, a->len);
-		ft_putstr("b: \t");
-		display(b->num, b->len);*/
+		lower = a->num[0] != first ? a->num[0] : higher(a, b);
 		j = 0;
 		while (j < b->len)
 		{
@@ -146,23 +184,41 @@ void		autre_tri(t_pile *a, t_pile *b, int end)
 				lower = a->num[i];
 			i++;
 		}
+/*		ft_putstr("a: \t");
+		display(a->num, a->len);
+		ft_putstr("b: \t");
+		display(b->num, b->len);
+		printf("le plus petit: %d\n", lower);
+		usleep(30000);*/
 		if (is_in_stack(a, lower))
 		{
-			while (a->num[0] != lower)
+			if (get_index(a, lower) == 1)
 			{
-				ft_putendl("pb");
-				push(b, a);
-			}
-		}
-		else if (is_in_stack(b, lower))
-		{
-			if (get_index(b, lower) < b->len / 2)
-			{
-				while (b->num[0] != lower)
+				if (b->num[0] > b->num[1])
 				{
-					ft_putendl("rb");
-					rotate(b);
+					ft_putendl("ss");
+					swap(b);
 				}
+				else
+					ft_putendl("sa");
+				swap(a);
+			}
+			else
+				while (a->num[0] != lower)
+				{
+					ft_putendl("pb");
+					push(b, a);
+				}
+		}
+		else
+		{
+			if (get_index(b, lower) <= b->len / 2)
+			{
+					while (b->num[0] != lower)
+					{
+						ft_putendl("rb");
+						rotate(b);
+					}
 			}
 			else
 			{
@@ -175,10 +231,17 @@ void		autre_tri(t_pile *a, t_pile *b, int end)
 			ft_putendl("pa");
 			push(a, b);
 		}
-		ft_putendl("ra");
+		if (b->num[0] > b->num[b->len - 1])
+		{
+			ft_putendl("rr");
+			rotate(b);
+		}
+		else
+			ft_putendl("ra");
 		rotate(a);
+		a->sorted++;
 	}
-	if (end == higher(a, b))
+	if (pivot == higher(a, b))
 	{
 		while (b->len > 0)
 		{
@@ -186,10 +249,8 @@ void		autre_tri(t_pile *a, t_pile *b, int end)
 			push(a, b);
 		}
 	}
-	if (a->num[a->len - 1] == 50)
-		autre_tri(a, b, 75);
-	if (a->num[a->len - 1] == 75)
-		autre_tri(a, b, 100);
+	if (a->num[a->len - 1] != higher(a, b))
+		autre_tri(a, b);
 }
 
 void 		quick2(t_pile *a, t_pile *b)
@@ -214,7 +275,7 @@ void 		quick2(t_pile *a, t_pile *b)
 		push(a, b);
 		ft_putendl("ra");
 		rotate(a);
-		autre_tri(a, b, get_pivot(a));
+		autre_tri(a, b);
 		//		short_sort(a, b);
 		return ;
 	}

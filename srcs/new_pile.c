@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/07 16:56:46 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/08 14:34:12 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_pile	*new_pile(int len)
 		pile->num = (int*)malloc(sizeof(int) * len);
 	else
 		pile->num = 0;
+	pile->sorted = 0;
 	return (pile);
 }
 
