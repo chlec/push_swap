@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/07 17:52:10 by clecalie         ###   ########.fr       */
+/*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
+/*   Updated: 2018/02/08 13:55:56 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,44 @@ int			is_in_stack(t_pile *pile, int num)
 	return (0);
 }
 
-void		autre_tri(t_pile *a, t_pile *b)
+int			higher(t_pile *a, t_pile *b)
+{
+	int		best;
+	int		i;
+
+	best = a->num[0];
+	i = 0;
+	while (i < b->len)
+	{
+		if (b->num[i] > best)
+			best = b->num[i];
+		i++;
+	}
+	i = 0;
+	while (i < a->len)
+	{
+		if (a->num[i] > best)
+			best = a->num[i];
+		i++;
+	}
+	return (best);
+}
+
+int			get_index(t_pile *pile, int num)
+{
+	int		i;
+
+	i = 0;
+	while (i < pile->len)
+	{
+		if (pile->num[i] == num)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+void		autre_tri(t_pile *a, t_pile *b, int end)
 {
 	int		i;
 	int		j;
@@ -87,35 +124,28 @@ void		autre_tri(t_pile *a, t_pile *b)
 	//Sinon on le met a la fin
 	num = 0;
 	pivot = get_pivot(a);
-	first = a->num[0];
-	ft_putendl("ra");
-	rotate(a);
-	while (a->num[a->len - 1] != pivot)
+	first = 0;
+	while (a->num[a->len - 1] != end)
 	{
-		lower = a->num[0];
-		ft_putstr("a: \t");
+		lower = a->num[0] != 0 ? a->num[0] : higher(a, b);
+	/*	ft_putstr("a: \t");
 		display(a->num, a->len);
 		ft_putstr("b: \t");
-		display(b->num, b->len);
+		display(b->num, b->len);*/
 		j = 0;
 		while (j < b->len)
 		{
 			if (b->num[j] < lower)
-			{
 				lower = b->num[j];
-			}
 			j++;
 		}
 		i = 0;
 		while (i < a->len && a->num[i] != first)
 		{
-			if (a->num[i] < lower)
-			{
+			if (a->num[i] < lower && a->num[i] != 0)
 				lower = a->num[i];
-			}
 			i++;
 		}
-		printf("le lower is %d\n", lower);
 		if (is_in_stack(a, lower))
 		{
 			while (a->num[0] != lower)
@@ -126,35 +156,40 @@ void		autre_tri(t_pile *a, t_pile *b)
 		}
 		else if (is_in_stack(b, lower))
 		{
-			while (b->num[0] != lower)
+			if (get_index(b, lower) < b->len / 2)
 			{
-				ft_putendl("rb");
-				rotate(b);
+				while (b->num[0] != lower)
+				{
+					ft_putendl("rb");
+					rotate(b);
+				}
+			}
+			else
+			{
+				while (b->num[0] != lower)
+				{
+					ft_putendl("rrb");
+					rev_rotate(b);
+				}
 			}
 			ft_putendl("pa");
 			push(a, b);
 		}
-		while (a->num[a->len - 1] != lower)
+		ft_putendl("ra");
+		rotate(a);
+	}
+	if (end == higher(a, b))
+	{
+		while (b->len > 0)
 		{
-			ft_putendl("ra");
-			rotate(a);
-			sleep(1);
-		/*	ft_putstr("a: \t");
-		display(a->num, a->len);
-		ft_putstr("b: \t");
-		display(b->num, b->len);*/
+			ft_putendl("pa");
+			push(a, b);
 		}
 	}
-	while (b->len > 0)
-	{
-		ft_putendl("pa");
-		push(a, b);
-	}
-	/*ft_putstr("a: \t");
-	display(a->num, a->len);
-	ft_putstr("b: \t");
-	display(b->num, b->len);*/
-
+	if (a->num[a->len - 1] == 50)
+		autre_tri(a, b, 75);
+	if (a->num[a->len - 1] == 75)
+		autre_tri(a, b, 100);
 }
 
 void 		quick2(t_pile *a, t_pile *b)
@@ -177,7 +212,9 @@ void 		quick2(t_pile *a, t_pile *b)
 		push(a, b);
 		ft_putendl("pa");
 		push(a, b);
-		autre_tri(a, b);
+		ft_putendl("ra");
+		rotate(a);
+		autre_tri(a, b, get_pivot(a));
 		//		short_sort(a, b);
 		return ;
 	}
