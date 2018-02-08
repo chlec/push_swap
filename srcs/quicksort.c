@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/08 16:24:32 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/08 16:44:59 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,11 +180,11 @@ void		autre_tri(t_pile *a, t_pile *b)
 		i = 0;
 		while (i < a->len && a->num[i] != first)
 		{
-			if (a->num[i] < lower && a->num[i] != 0)
+			if (a->num[i] < lower && a->num[i] != first)
 				lower = a->num[i];
 			i++;
 		}
-/*		ft_putstr("a: \t");
+	/*	ft_putstr("a: \t");
 		display(a->num, a->len);
 		ft_putstr("b: \t");
 		display(b->num, b->len);
@@ -192,33 +192,35 @@ void		autre_tri(t_pile *a, t_pile *b)
 		usleep(30000);*/
 		if (is_in_stack(a, lower))
 		{
-			if (get_index(a, lower) == 1)
+			while (a->num[0] != lower && a->num[1] != lower)
 			{
-				if (b->num[0] > b->num[1])
+				ft_putendl("pb");
+				push(b, a);
+			}
+			if (a->num[1] == lower)
+			{
+				if (b->len > 2 && b->num[0] > b->num[1])
 				{
 					ft_putendl("ss");
 					swap(b);
+					swap(a);
 				}
 				else
-					ft_putendl("sa");
-				swap(a);
-			}
-			else
-				while (a->num[0] != lower)
 				{
-					ft_putendl("pb");
-					push(b, a);
+					ft_putendl("sa");
+					swap(a);
 				}
+			}
 		}
 		else
 		{
-			if (get_index(b, lower) <= b->len / 2)
+			if (get_index(b, lower) < b->len / 2)
 			{
-					while (b->num[0] != lower)
-					{
-						ft_putendl("rb");
-						rotate(b);
-					}
+				while (b->num[0] != lower)
+				{
+					ft_putendl("rb");
+					rotate(b);
+				}
 			}
 			else
 			{
@@ -231,7 +233,7 @@ void		autre_tri(t_pile *a, t_pile *b)
 			ft_putendl("pa");
 			push(a, b);
 		}
-		if (b->num[0] > b->num[b->len - 1])
+		if (b->len > 2 && b->num[0] > b->num[b->len - 1])
 		{
 			ft_putendl("rr");
 			rotate(b);
