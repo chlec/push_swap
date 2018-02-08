@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/08 16:44:59 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/08 17:08:30 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int		get_pivot_sort(t_pile *a, t_pile *b)
 	total = b->len;
 	while (b->len != 0)
 		push(a, b);
+	printf("on prend le pivot, deja %d de trirer\n", a->sorted);
+	display(a->num, a->len);
+	sleep(1);
 	left = 0;
 	right = 1;
 	i = 0;
@@ -42,8 +45,10 @@ int		get_pivot_sort(t_pile *a, t_pile *b)
 				left++;
 			j++;
 		}
+		printf("num %d, left: %d, right: %d\n", a->num[i], left, right);
 		i++;
 	}
+	sleep(1);
 	while (b->len < total)
 		push(b, a);
 	return (pivot);
@@ -184,12 +189,12 @@ void		autre_tri(t_pile *a, t_pile *b)
 				lower = a->num[i];
 			i++;
 		}
-	/*	ft_putstr("a: \t");
-		display(a->num, a->len);
-		ft_putstr("b: \t");
-		display(b->num, b->len);
-		printf("le plus petit: %d\n", lower);
-		usleep(30000);*/
+		ft_putstr("a: \t");
+			display(a->num, a->len);
+			ft_putstr("b: \t");
+			display(b->num, b->len);
+			printf("le plus petit: %d, pivot: %d\n", lower, pivot);
+			usleep(30000);
 		if (is_in_stack(a, lower))
 		{
 			while (a->num[0] != lower && a->num[1] != lower)
@@ -199,7 +204,7 @@ void		autre_tri(t_pile *a, t_pile *b)
 			}
 			if (a->num[1] == lower)
 			{
-				if (b->len > 2 && b->num[0] > b->num[1])
+				if (b->len >= 2 && b->num[0] > b->num[1])
 				{
 					ft_putendl("ss");
 					swap(b);
@@ -216,10 +221,24 @@ void		autre_tri(t_pile *a, t_pile *b)
 		{
 			if (get_index(b, lower) < b->len / 2)
 			{
-				while (b->num[0] != lower)
+				while (b->len >= 2 && b->num[0] != lower && b->num[1] != lower)
 				{
 					ft_putendl("rb");
 					rotate(b);
+				}
+				if (b->len > 1 && b->num[1] == lower)
+				{
+					if (a->len >= 2 && a->num[0] > a->num[1] && a->num[0] != first)
+					{
+						ft_putendl("ss");
+						swap(b);
+						swap(a);
+					}
+					else
+					{
+						ft_putendl("sb");
+						swap(b);
+					}
 				}
 			}
 			else
@@ -233,7 +252,7 @@ void		autre_tri(t_pile *a, t_pile *b)
 			ft_putendl("pa");
 			push(a, b);
 		}
-		if (b->len > 2 && b->num[0] > b->num[b->len - 1])
+		if (b->len >= 2 && b->num[0] > b->num[b->len - 1])
 		{
 			ft_putendl("rr");
 			rotate(b);
