@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 11:25:04 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/09 12:19:50 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,11 +185,14 @@ void		autre_tri(t_pile *a, t_pile *b)
 			i++;
 		}
 	/*	ft_putstr("a: \t");
-			display(a->num, a->len);
-			ft_putstr("b: \t");
-			display(b->num, b->len);
-			printf("le plus petit: %d, pivot: %d\n", lower, pivot);
-			usleep(30000);*/
+		display(a->num, a->len);
+		ft_putstr("b: \t");
+		display(b->num, b->len);
+		printf("le plus petit: %d, pivot: %d\n", lower, pivot);
+		usleep(30000);*/
+		/*
+		 * 	ON MET L'ELEMENT EN 1ER POSITION DE A - PILE A
+		*/
 		if (is_in_stack(a, lower))
 		{
 			while (a->num[0] != lower && a->num[1] != lower)
@@ -214,7 +217,10 @@ void		autre_tri(t_pile *a, t_pile *b)
 		}
 		else
 		{
-			if (get_index(b, lower) < b->len / 2)
+			/*
+			 * ON MET L'ELEMENT EN 1ER POSITION DE A - PILE B
+			*/ 
+			if (get_index(b, lower) < b->len / 2 + b->len % 2)
 			{
 				while (b->len >= 2 && b->num[0] != lower && b->num[1] != lower)
 				{
@@ -238,10 +244,27 @@ void		autre_tri(t_pile *a, t_pile *b)
 			}
 			else
 			{
-				while (b->num[0] != lower)
+				if (b->num[1] == lower)
 				{
-					ft_putendl("rrb");
-					rev_rotate(b);
+					if (a->len >= 2 && a->num[0] > a->num[1] && a->num[1] != first)
+					{
+						ft_putendl("ss");
+						swap(b);
+						swap(a);
+					}
+					else
+					{
+						ft_putendl("sb");
+						swap(b);
+					}
+				}
+				else
+				{
+					while (b->num[0] != lower)
+					{
+						ft_putendl("rrb");
+						rev_rotate(b);
+					}
 				}
 			}
 			ft_putendl("pa");
