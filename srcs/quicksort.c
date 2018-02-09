@@ -6,12 +6,35 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 14:26:40 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/09 16:59:08 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "push_swap.h"
+
+int			lowest_num(t_pile *a, t_pile *b)
+{
+	int		best;
+	int		i;
+
+	best = a->num[0];
+	i = 0;
+	while (i < b->len)
+	{
+		if (b->num[i] < best)
+			best = b->num[i];
+		i++;
+	}
+	i = 0;
+	while (i < a->len)
+	{
+		if (a->num[i] < best)
+			best = a->num[i];
+		i++;
+	}
+	return (best);
+}
 
 int		get_pivot_sort(t_pile *a, t_pile *b)
 {
@@ -21,14 +44,16 @@ int		get_pivot_sort(t_pile *a, t_pile *b)
 	int		left;
 	int		right;
 	int		total;
+	int		first;
 
 	total = b->len;
 	while (b->len != 0)
 		push(a, b);
+	first = lowest_num(a, b);
 	left = 0;
 	right = 1;
 	i = 0;
-	while (i < a->len - a->sorted - 1 && left != right)
+	while (i < a->len - a->sorted - 1 && a->num[i] != first && left != right)
 	{
 		right = !(a->len - a->sorted % 2);
 		left = 0;
@@ -93,28 +118,6 @@ int			is_in_stack(t_pile *pile, int num)
 	return (0);
 }
 
-int			lowest_num(t_pile *a, t_pile *b)
-{
-	int		best;
-	int		i;
-
-	best = a->num[0];
-	i = 0;
-	while (i < b->len)
-	{
-		if (b->num[i] < best)
-			best = b->num[i];
-		i++;
-	}
-	i = 0;
-	while (i < a->len)
-	{
-		if (a->num[i] < best)
-			best = a->num[i];
-		i++;
-	}
-	return (best);
-}
 
 int			higher(t_pile *a, t_pile *b)
 {
@@ -153,19 +156,145 @@ int			get_index(t_pile *pile, int num)
 	return (0);
 }
 
-void		autre_tri(t_pile *a, t_pile *b)
+void		quick3(t_pile *a, t_pile *b)
+{
+	int		i;
+	int		num;
+	int		pivot;
+
+	if (b->len > 0)
+	{
+		i = 0;
+		pivot = get_pivot(b);
+		while (i < b->len)
+		{
+			if (b->num[i] < pivot)
+			{
+				ft_putendl("rb");
+				rotate(b);
+			}
+			else
+			{
+				num = b->num[i];
+				while (b->num[0] != num)
+				{
+					ft_putendl("rb");
+					rotate(b);
+				}
+				ft_putendl("pa");
+				push(a, b);
+				i = -1;	
+			}
+			i++;
+		}
+	}
+}
+
+void 		quick4(t_pile *a, t_pile *b)
+{
+	int		pivot;
+	int		i;
+	int		len;
+
+	i = 0;
+	len = b->len;
+	pivot = get_pivot(b);
+	if (b->len > 0)
+	{
+		if (b->len == 2)
+		{
+			if (b->num[0] < b->num[1])
+			{
+				ft_putendl("sb");
+				swap(b);
+			}
+			ft_putendl("pa");
+			push(a, b);
+			ft_putendl("pa");
+			push(a, b);
+			ft_putendl("ra");
+			rotate(a);
+			a->sorted++;
+			return ;
+		}
+		if (b->len == 1)
+		{
+			ft_putendl("pa");
+			push(a, b);
+			ft_putendl("ra");
+			rotate(a);
+			a->sorted++;
+			return ;
+		}
+		while (i < len)
+		{
+			if (b->num[0] > pivot)
+			{
+				ft_putendl("pa");
+				push(a, b);
+			}
+			else
+			{
+				ft_putendl("rb");
+				rotate(b);
+			}
+			i++;
+		}
+		quick4(a, b);
+	}
+}
+void		tri_3(t_pile *a, t_pile *b, int pivot)
+{
+	int		i;
+	int		first;
+	int		on_right;
+
+	i = 0;
+	first = lowest_num(a, b);
+	on_right = 0;
+	while (a->num[0] != first)
+	{
+		if (a->num[0] > pivot)
+		{
+			ft_putendl("ra");
+			rotate(a);
+			on_right++;
+		}
+		else
+		{
+			ft_putendl("pb");
+			push(b, a);
+		}
+		if (b->num[0] > pivot)
+		{
+			ft_putendl("rb");
+			rotate(b);
+		}
+	}
+	while (on_right > 0)
+	{
+		ft_putendl("rra");
+		rev_rotate(a);
+		on_right--;
+
+	}
+	quick4(a, b);
+}
+
+
+void		autre_tri(t_pile *a, t_pile *b, int pivot)
 {
 	int		i;
 	int		j;
 	int		num;
 	int		lower;
-	int		pivot;
 	int		first;
+	int		on_right;
 
 	//En gros on prend le 1er nombre, si on trouve plus petit on le met dans b et on refait
 	//Sinon on le met a la fin
 	num = 0;
-	pivot = get_pivot_sort(a, b);
+	on_right = 0;
 	first = lowest_num(a, b);
 	while (a->num[a->len - 1] != pivot)
 	{
@@ -188,22 +317,39 @@ void		autre_tri(t_pile *a, t_pile *b)
 		display(a->num, a->len);
 		ft_putstr("b: \t");
 		display(b->num, b->len);
-		printf("le plus petit: %d, pivot: %d\n", lower, pivot);
+		printf("le plus lower: %d, pivot: %d\n", lower, pivot);
 		usleep(30000);*/
 		/*
 		 * 	ON MET L'ELEMENT EN 1ER POSITION DE A - PILE A
-		*/
+		 */
 		if (is_in_stack(a, lower))
 		{
-			while (a->num[0] != lower && a->num[1] != lower)
+			while (a->num[0] != lower)// && a->num[1] != lower)
+			{
+				if (a->num[0] > pivot)
+				{
+					ft_putendl("ra");
+					rotate(a);
+					on_right++;
+				}
+				else
+				{
+					ft_putendl("pb");
+					push(b, a);
+				}
+			}
+			if (on_right > 0)
 			{
 				ft_putendl("pb");
 				push(b, a);
-				if (b->num[0] > pivot)
+				while (on_right > 0)
 				{
-					ft_putendl("rb");
-					rotate(b);
+					ft_putendl("rra");
+					rev_rotate(a);
+					on_right--;
 				}
+				ft_putendl("pa");
+				push(a, b);
 			}
 			if (a->num[1] == lower)
 			{
@@ -224,7 +370,7 @@ void		autre_tri(t_pile *a, t_pile *b)
 		{
 			/*
 			 * ON MET L'ELEMENT EN 1ER POSITION DE A - PILE B
-			*/ 
+			 */ 
 			if (get_index(b, lower) < b->len / 2 + b->len % 2)
 			{
 				//Trier b jusqu'a sont pivot, laisser les plus petit ici
@@ -276,7 +422,7 @@ void		autre_tri(t_pile *a, t_pile *b)
 			ft_putendl("pa");
 			push(a, b);
 		}
-		if (b->len >= 2) //&& b->num[0] > b->num[b->len - 1])
+		if (b->len >= 2 && b->num[0] > b->num[b->len - 1] && b->num[0] > b->num [1])
 		{
 			ft_putendl("rr");
 			rotate(b);
@@ -295,7 +441,11 @@ void		autre_tri(t_pile *a, t_pile *b)
 		}
 	}
 	if (a->num[a->len - 1] != higher(a, b))
-		autre_tri(a, b);
+	{
+		pivot = get_pivot_sort(a, b);
+		tri_3(a, b, pivot);
+		autre_tri(a, b, pivot);
+	}
 }
 //le but est de prendre le pivot de b, et de mettre tout les plus gros sur a et les plus petits les laisser
 
@@ -321,8 +471,8 @@ void 		quick2(t_pile *a, t_pile *b)
 		push(a, b);
 		ft_putendl("ra");
 		rotate(a);
-		autre_tri(a, b);
-		//		short_sort(a, b);
+		autre_tri(a, b, get_pivot_sort(a, b));
+		//short_sort(a, b);
 		return ;
 	}
 	while (i < len)
@@ -358,7 +508,7 @@ void 		quicksort(t_pile *a, t_pile *b)
 	}
 	while (i < len)
 	{
-		if (a->num[0] < pivot)
+		if (a->num[0] <= pivot)
 		{
 			ft_putendl("pb");
 			push(b, a);
