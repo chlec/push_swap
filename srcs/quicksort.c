@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 16:59:08 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/09 17:31:01 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ void 		quick4(t_pile *a, t_pile *b)
 			push(a, b);
 			ft_putendl("ra");
 			rotate(a);
-			a->sorted++;
+			//a->sorted++;
 			return ;
 		}
 		if (b->len == 1)
@@ -223,7 +223,7 @@ void 		quick4(t_pile *a, t_pile *b)
 			push(a, b);
 			ft_putendl("ra");
 			rotate(a);
-			a->sorted++;
+		//	a->sorted++;
 			return ;
 		}
 		while (i < len)
@@ -265,11 +265,11 @@ void		tri_3(t_pile *a, t_pile *b, int pivot)
 			ft_putendl("pb");
 			push(b, a);
 		}
-		if (b->num[0] > pivot)
+	/*	if (b->num[0] > pivot)
 		{
 			ft_putendl("rb");
 			rotate(b);
-		}
+		}*/
 	}
 	while (on_right > 0)
 	{
@@ -313,12 +313,6 @@ void		autre_tri(t_pile *a, t_pile *b, int pivot)
 				lower = a->num[i];
 			i++;
 		}
-		/*ft_putstr("a: \t");
-		display(a->num, a->len);
-		ft_putstr("b: \t");
-		display(b->num, b->len);
-		printf("le plus lower: %d, pivot: %d\n", lower, pivot);
-		usleep(30000);*/
 		/*
 		 * 	ON MET L'ELEMENT EN 1ER POSITION DE A - PILE A
 		 */
@@ -344,8 +338,17 @@ void		autre_tri(t_pile *a, t_pile *b, int pivot)
 				push(b, a);
 				while (on_right > 0)
 				{
+					if (b->len >= 2 && b->num[0] > b->num[1] && b->num[0] > b->num[b->len - 1])
+					{
+						ft_putendl("rrr");
+						rev_rotate(b);
+						rev_rotate(a);
+					}
+					else
+					{
 					ft_putendl("rra");
 					rev_rotate(a);
+					}
 					on_right--;
 				}
 				ft_putendl("pa");
@@ -449,49 +452,6 @@ void		autre_tri(t_pile *a, t_pile *b, int pivot)
 }
 //le but est de prendre le pivot de b, et de mettre tout les plus gros sur a et les plus petits les laisser
 
-void 		quick2(t_pile *a, t_pile *b)
-{
-	int		pivot;
-	int		i;
-	int		len;
-
-	i = 0;
-	len = b->len;
-	pivot = get_pivot(b);
-	if (b->len == 2)
-	{
-		if (b->num[0] < b->num[1])
-		{
-			ft_putendl("sb");
-			swap(b);
-		}
-		ft_putendl("pa");
-		push(a, b);
-		ft_putendl("pa");
-		push(a, b);
-		ft_putendl("ra");
-		rotate(a);
-		autre_tri(a, b, get_pivot_sort(a, b));
-		//short_sort(a, b);
-		return ;
-	}
-	while (i < len)
-	{
-		if (b->num[0] > pivot)
-		{
-			ft_putendl("pa");
-			push(a, b);
-		}
-		else
-		{
-			ft_putendl("rb");
-			rotate(b);
-		}
-		i++;
-	}
-	quick2(a, b);
-}
-
 void 		quicksort(t_pile *a, t_pile *b)
 {
 	int		pivot;
@@ -529,5 +489,6 @@ void 		quicksort(t_pile *a, t_pile *b)
 		}
 		i++;
 	}
-	quick2(a, b);
+	quick4(a, b);
+	autre_tri(a, b, get_pivot_sort(a, b));
 }

@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/08 14:34:01 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/09 17:23:59 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ void			display(int *list, int n);
 void 			quicksort(t_pile *a, t_pile *b);
 void			short_sort(t_pile *a, t_pile *b);
 int				check_stack(t_pile *pile);
+void			autre_tri(t_pile *a, t_pile *b, int pivot);
+
 
 #endif
