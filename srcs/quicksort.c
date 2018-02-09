@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 12:19:50 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/09 14:26:40 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void		autre_tri(t_pile *a, t_pile *b)
 				lower = a->num[i];
 			i++;
 		}
-	/*	ft_putstr("a: \t");
+		/*ft_putstr("a: \t");
 		display(a->num, a->len);
 		ft_putstr("b: \t");
 		display(b->num, b->len);
@@ -199,6 +199,11 @@ void		autre_tri(t_pile *a, t_pile *b)
 			{
 				ft_putendl("pb");
 				push(b, a);
+				if (b->num[0] > pivot)
+				{
+					ft_putendl("rb");
+					rotate(b);
+				}
 			}
 			if (a->num[1] == lower)
 			{
@@ -222,6 +227,7 @@ void		autre_tri(t_pile *a, t_pile *b)
 			*/ 
 			if (get_index(b, lower) < b->len / 2 + b->len % 2)
 			{
+				//Trier b jusqu'a sont pivot, laisser les plus petit ici
 				while (b->len >= 2 && b->num[0] != lower && b->num[1] != lower)
 				{
 					ft_putendl("rb");
@@ -270,7 +276,7 @@ void		autre_tri(t_pile *a, t_pile *b)
 			ft_putendl("pa");
 			push(a, b);
 		}
-		if (b->len >= 2 && b->num[0] > b->num[b->len - 1])
+		if (b->len >= 2) //&& b->num[0] > b->num[b->len - 1])
 		{
 			ft_putendl("rr");
 			rotate(b);
@@ -291,6 +297,7 @@ void		autre_tri(t_pile *a, t_pile *b)
 	if (a->num[a->len - 1] != higher(a, b))
 		autre_tri(a, b);
 }
+//le but est de prendre le pivot de b, et de mettre tout les plus gros sur a et les plus petits les laisser
 
 void 		quick2(t_pile *a, t_pile *b)
 {
@@ -358,8 +365,17 @@ void 		quicksort(t_pile *a, t_pile *b)
 		}
 		else
 		{
-			ft_putendl("ra");
-			rotate(a);
+			if (b->len >= 2 && b->num[0] < b->num[1])
+			{
+				ft_putendl("rr");
+				rotate(b);
+				rotate(a);
+			}
+			else
+			{
+				ft_putendl("ra");
+				rotate(a);
+			}
 		}
 		i++;
 	}

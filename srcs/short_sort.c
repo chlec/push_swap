@@ -6,12 +6,36 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/07 15:54:29 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/09 13:01:50 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "push_swap.h"
+
+static void	short_sort_2(t_pile *a, t_pile *b)
+{
+	if (check_stack(a) == 1 && b->num[0] < a->num[0])
+	{
+		ft_putendl("pa");
+		push(a, b);	
+	}
+	else if ((a->num[0] < a->num[1]) && (b->len == 0 || a->num[0] > b->num[0]))
+	{
+		ft_putendl("pb");
+		push(b, a);
+	}
+	else if (a->num[0] > a->num[a->len - 1])
+	{
+		ft_putendl("ra");
+		rotate(a);
+	}
+	else if (a->len > 1)
+	{
+		ft_putendl("pb");
+		push(b, a);
+	}
+}
 
 void	short_sort(t_pile *a, t_pile *b)
 {
@@ -37,25 +61,7 @@ void	short_sort(t_pile *a, t_pile *b)
 			ft_putendl("sb");
 			swap(b);
 		}
-		else if (check_stack(a) == 1 && b->num[0] < a->num[0])
-		{
-			ft_putendl("pa");
-			push(a, b);	
-		}
-		else if ((a->num[0] < a->num[1]) && (b->len == 0 || a->num[0] > b->num[0]))
-		{
-			ft_putendl("pb");
-			push(b, a);
-		}
-		else if (a->num[0] > a->num[a->len - 1])
-		{
-			ft_putendl("ra");
-			rotate(a);
-		}
-		else if (a->len > 1)
-		{
-			ft_putendl("pb");
-			push(b, a);
-		}
+		else
+			short_sort_2(a, b);
 	}	
 }
