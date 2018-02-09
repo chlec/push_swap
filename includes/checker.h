@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 17:23:59 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/09 17:39:12 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void 			quicksort(t_pile *a, t_pile *b);
 void			short_sort(t_pile *a, t_pile *b);
 int				check_stack(t_pile *pile);
 void			autre_tri(t_pile *a, t_pile *b, int pivot);
-
+int				get_pivot(t_pile *a);
+int				get_pivot_sort(t_pile *a, t_pile *b);
+int				lowest_num(t_pile *a, t_pile *b);
+int				is_in_stack(t_pile *pile, int num);
+int				higher(t_pile *a, t_pile *b);
+int				get_index(t_pile *pile, int num);
 
 #endif

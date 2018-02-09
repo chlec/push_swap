@@ -6,7 +6,7 @@
 #    By: clecalie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/15 16:24:08 by clecalie          #+#    #+#              #
-#    Updated: 2018/01/30 17:14:12 by clecalie         ###   ########.fr        #
+#    Updated: 2018/02/09 17:40:12 by clecalie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRCS_PUSH_SWAP =	$(PATH_SRCS)main.c \
 	   				$(PATH_SRCS)check_error.c \
 					$(PATH_SRCS)new_pile.c \
 					$(PATH_SRCS)op.c \
+					$(PATH_SRCS)get_pivot.c \
+					$(PATH_SRCS)sort_util.c \
 					$(PATH_SRCS)quicksort.c \
 					$(PATH_SRCS)short_sort.c
 
