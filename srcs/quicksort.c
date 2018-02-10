@@ -47,6 +47,7 @@ void		quick3(t_pile *a, t_pile *b)
 	}
 }
 
+//tri de b
 void 		quick4(t_pile *a, t_pile *b)
 {
 	int		pivot;
@@ -55,7 +56,6 @@ void 		quick4(t_pile *a, t_pile *b)
 
 	i = 0;
 	len = b->len;
-	pivot = get_pivot(b);
 	if (b->len > 0)
 	{
 		if (b->len == 2)
@@ -81,6 +81,7 @@ void 		quick4(t_pile *a, t_pile *b)
 			rotate(a);
 			return ;
 		}
+		pivot = get_pivot(b);
 		while (i < len)
 		{
 			if (b->num[0] > pivot)
@@ -98,6 +99,8 @@ void 		quick4(t_pile *a, t_pile *b)
 		quick4(a, b);
 	}
 }
+
+//une sorte de quicksort? il met les plus petit dans b et les plus grands a la fin de a
 void		tri_3(t_pile *a, t_pile *b, int pivot)
 {
 	int		i;
@@ -171,12 +174,19 @@ void		autre_tri(t_pile *a, t_pile *b, int pivot)
 		/*
 		 * 	ON MET L'ELEMENT EN 1ER POSITION DE A - PILE A
 		 */
+		/*ft_putstr("a: \t");
+		display(a->num, a->len);
+		ft_putstr("b: \t");
+		display(b->num, b->len);
+		printf("le pivot est %d et le lower %d\n", pivot, lower);
+		usleep(30000);*/
 		if (is_in_stack(a, lower))
 		{
-			while (a->num[0] != lower)// && a->num[1] != lower)
+			while (a->num[0] != lower && a->num[1] != lower)
 			{
 				if (a->num[0] > pivot)
 				{
+					
 					ft_putendl("ra");
 					rotate(a);
 					on_right++;
@@ -305,7 +315,6 @@ void		autre_tri(t_pile *a, t_pile *b, int pivot)
 		autre_tri(a, b, pivot);
 	}
 }
-//le but est de prendre le pivot de b, et de mettre tout les plus gros sur a et les plus petits les laisser
 
 void 		quicksort(t_pile *a, t_pile *b)
 {
