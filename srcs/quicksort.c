@@ -235,7 +235,7 @@ void		autre_tri(t_pile *a, t_pile *b, int pivot)
 		/*
 		 * 	ON MET L'ELEMENT EN 1ER POSITION DE A - PILE A
 		 */
-	/*	ft_putstr("a: \t");
+		/*ft_putstr("a: \t");
 		display(a->num, a->len);
 		ft_putstr("b: \t");
 		display(b->num, b->len);
@@ -275,27 +275,10 @@ void		autre_tri(t_pile *a, t_pile *b, int pivot)
 			}
 			else
 			{
-				if (b->num[1] == lower)
+				while (b->num[0] != lower)
 				{
-					if (a->len >= 2 && a->num[0] > a->num[1] && a->num[1] != first)
-					{
-						ft_putendl("ss");
-						swap(b);
-						swap(a);
-					}
-					else
-					{
-						ft_putendl("sb");
-						swap(b);
-					}
-				}
-				else
-				{
-					while (b->num[0] != lower)
-					{
-						ft_putendl("rrb");
-						rev_rotate(b);
-					}
+					ft_putendl("rrb");
+					rev_rotate(b);
 				}
 			}
 			ft_putendl("pa");
