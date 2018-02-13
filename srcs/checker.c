@@ -10,7 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
+
+static int	store_number(t_stack *a, int argc, char **argv)
+{
+	int		i;
+
+	i = 0;
+	while (++i < argc)
+	{
+		if (!only_number(argv[i]) || has_double(argv[i], a->num, i - 1))
+			return (0);
+		a->num[i - 1] = ft_atoi(argv[i]);
+	}
+	return (1);
+}
 
 int			main(int argc, char **argv)
 {
@@ -24,14 +38,10 @@ int			main(int argc, char **argv)
 	b = new_stack(argc - 1);
 	b->len = 0;
 	i = 0;
-	while (++i < argc)
+	if (!store_number(a, argc, argv))
 	{
-		if (!only_number(argv[i]) || has_double(argv[i], a->num, i - 1))
-		{
-			ft_putendl_fd("Error", 2);
-			return (0);
-		}
-		a->num[i - 1] = ft_atoi(argv[i]);
+		ft_putendl_fd("Error", 2);
+		return (0);
 	}
 	while ((ret = get_next_line(0, &op)) > 0)
 	{

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
 #include "push_swap.h"
 
 static void	short_sort_2(t_stack *a, t_stack *b)

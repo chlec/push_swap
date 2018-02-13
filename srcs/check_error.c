@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 int		only_number(char *str)
 {
@@ -49,7 +49,18 @@ int		has_double(char *str, int *num, int len)
 int		valid_ops(char *op)
 {
 	//sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr
-	(void)op;
+	if (!ft_strequ(op, "sa") &&
+		!ft_strequ(op, "sb") &&
+		!ft_strequ(op, "ss") &&
+		!ft_strequ(op, "pa") &&
+		!ft_strequ(op, "pb") &&
+		!ft_strequ(op, "ra") &&
+		!ft_strequ(op, "rb") &&
+		!ft_strequ(op, "rr") &&
+		!ft_strequ(op, "rra") &&
+		!ft_strequ(op, "rrb") &&
+		!ft_strequ(op, "rrr"))
+		return (0);
 	return (1);
 }
 

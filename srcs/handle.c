@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 static int	check_swap(t_stack *a, t_stack *b, char *op)
 {
@@ -96,9 +96,5 @@ int		handle_ops(char *op, t_stack *a, t_stack *b)
 		if (!(check_push(a, b, op)))
 			if (!check_rev_rotate(a, b, op))
 				check_rotate(a, b, op);
-	//ft_putstr(op);
-	//ft_putstr(": a:\t");
-	//display(a->num, a->len);
-	//ft_strdel(&op);
 	return (a->len);
 }

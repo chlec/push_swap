@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
 #include "push_swap.h"
 
 int			lowest_num(t_stack *a, t_stack *b)
@@ -86,4 +85,27 @@ int			get_index(t_stack *stack, int num)
 		i++;
 	}
 	return (0);
+}
+
+int			get_lower(t_stack *a, t_stack *b, int first)
+{
+	int 	i;
+	int		lower;
+
+	lower = a->num[0] != first ? a->num[0] : higher(a, b);
+	i = 0;
+	while (i < b->len)
+	{
+		if (b->num[i] < lower)
+			lower = b->num[i];
+		i++;
+	}
+	i = 0;
+	while (i < a->len && a->num[i] != first)
+	{
+		if (a->num[i] < lower && a->num[i] != first)
+			lower = a->num[i];
+		i++;
+	}
+	return (lower);
 }
