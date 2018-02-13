@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 17:40:59 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/09 17:41:59 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,24 @@ static void	move_number_on_right(t_stack *a, t_stack *b, int on_right)
 	push(a, b);
 }
 
+static void	swap_a(t_stack *a, t_stack *b, int lower)
+{
+	if (a->num[1] == lower)
+	{
+		if (b->len >= 2 && b->num[0] > b->num[1])
+		{
+			ft_putendl("ss");
+			swap(b);
+			swap(a);
+		}
+		else
+		{
+			ft_putendl("sa");
+			swap(a);
+		}
+	}
+}
+
 static void	in_a(t_stack *a, t_stack *b, int pivot, int lower)
 {
 	int 	on_right;
@@ -56,20 +74,7 @@ static void	in_a(t_stack *a, t_stack *b, int pivot, int lower)
 	}
 	if (on_right > 0)
 		move_number_on_right(a, b, on_right);
-	if (a->num[1] == lower)
-	{
-		if (b->len >= 2 && b->num[0] > b->num[1])
-		{
-			ft_putendl("ss");
-			swap(b);
-			swap(a);
-		}
-		else
-		{
-			ft_putendl("sa");
-			swap(a);
-		}
-	}
+	swap_a(a, b, lower);
 }
 
 void		sort_a(t_stack *a, t_stack *b, int pivot)

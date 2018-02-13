@@ -70,7 +70,6 @@ clean:
 	@rm -f $(OBJS_CHECKER_FILTERED) $(OBJS_PUSH_SWAP_FILTERED)
 	@/bin/echo "Objects files cleaned!"
 
-
 fclean: clean
 	@make -C libft/ fclean
 	@rm -f $(NAME_1) $(NAME_2)

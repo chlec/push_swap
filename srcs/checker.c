@@ -48,9 +48,11 @@ int			main(int argc, char **argv)
 		if (!valid_ops(op))
 		{
 			ft_putendl_fd("Error", 2);
+			ft_strdel(&op);
 			return (0);
 		}
 		a->len = handle_ops(op, a, b);
+		ft_strdel(&op);
 	}
 	if (check_valid(a, b))
 		ft_putendl("OK");
