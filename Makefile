@@ -49,22 +49,32 @@ FLAGS = -Wall -Werror -Wextra
 all: $(NAME_1) $(NAME_2)
 
 $(NAME_1): $(OBJS_CHECKER_FILTERED)
-	make -C libft/
-	gcc $(FLAGS) $(OBJS_CHECKER_FILTERED) $(LIB_OBJS) -o $(NAME_1)
+	@/bin/echo -n "Compiling libft..."
+	@make -C libft/
+	@echo " [\033[0;32mOK\033[0m]"
+	@/bin/echo -n "Compiling checker..."
+	@gcc $(FLAGS) $(OBJS_CHECKER_FILTERED) $(LIB_OBJS) -o $(NAME_1)
+	@echo " [\033[0;32mOK\033[0m]"
 
 $(NAME_2): $(OBJS_PUSH_SWAP_FILTERED)
-	gcc $(FLAGS) $(OBJS_PUSH_SWAP_FILTERED) $(LIB_OBJS) -o $(NAME_2)
+	@/bin/echo -n "Compiling push_swap..."
+	@gcc $(FLAGS) $(OBJS_PUSH_SWAP_FILTERED) $(LIB_OBJS) -o $(NAME_2)
+	@echo " [\033[0;32mOK\033[0m]"
 
 %.o: $(PATH_SRCS)%.c
-	gcc -c $< $(FLAGS) -I libft/includes -I $(HEADERS_FILES)
+	@gcc -c $< $(FLAGS) -I libft/includes -I $(HEADERS_FILES)
 
 clean:
-	make -C libft/ clean
-	rm -f $(OBJS_CHECKER_FILTERED) $(OBJS_PUSH_SWAP_FILTERED)
+	@make -C libft/ clean
+	@/bin/echo "Libft cleaned!"
+	@rm -f $(OBJS_CHECKER_FILTERED) $(OBJS_PUSH_SWAP_FILTERED)
+	@/bin/echo "Objects files cleaned!"
+
 
 fclean: clean
-	make -C libft/ fclean
-	rm -f $(NAME_1) $(NAME_2)
+	@make -C libft/ fclean
+	@rm -f $(NAME_1) $(NAME_2)
+	@/bin/echo "Binaries files cleaned!"
 
 re: fclean all
 
