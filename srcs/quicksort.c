@@ -32,12 +32,15 @@ void 		sort_b(t_stack *a, t_stack *b)
 {
 	int		pivot;
 	int		len;
+	int		i;
 
 	len = b->len;
 	if (b->len <= 2)
 		return push_last_b_numbers(a, b);
 	pivot = get_pivot(b);
-	while (--len > 0)
+	i = 0;
+	while (i < len)
+	{
 		if (b->num[0] > pivot)
 		{
 			ft_putendl("pa");
@@ -48,6 +51,8 @@ void 		sort_b(t_stack *a, t_stack *b)
 			ft_putendl("rb");
 			rotate(b);
 		}
+		i++;
+	}
 	sort_b(a, b);
 }
 
@@ -105,5 +110,10 @@ void 		quicksort(t_stack *a, t_stack *b)
 		i++;
 	}
 	sort_b(a, b);
+	ft_putstr("a: \t");
+	display(a->num, a->len);
+	ft_putstr("b: \t");
+	display(b->num, b->len);
+	sleep(2);
 	sort_a(a, b, pivot);
 }
