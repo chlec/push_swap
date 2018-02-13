@@ -109,6 +109,7 @@ static void	split_lower_n_higher(t_stack *a, t_stack *b, int pivot)
 	first = lowest_num(a, b);
 	on_right = 0;
 	while (a->num[0] != first)
+	{
 		if (a->num[0] > pivot)
 		{
 			ft_putendl("ra");
@@ -120,6 +121,7 @@ static void	split_lower_n_higher(t_stack *a, t_stack *b, int pivot)
 			ft_putendl("pb");
 			push(b, a);
 		}
+	}
 	while (on_right > 0)
 	{
 		ft_putendl("rra");
@@ -212,23 +214,21 @@ void		in_a(t_stack *a, t_stack *b, int pivot, int lower)
 
 void		autre_tri(t_stack *a, t_stack *b, int pivot)
 {
-	int		num;
 	int		lower;
 	int		first;
 
 	//En gros on prend le 1er nombre, si on trouve plus petit on le met dans b et on refait
 	//Sinon on le met a la fin
-	num = 0;
 	first = lowest_num(a, b);
 	while (a->num[a->len - 1] != pivot)
 	{
 		lower = get_lower(a, b, first);
-		/*ft_putstr("a: \t");
+		ft_putstr("a: \t");
 		display(a->num, a->len);
 		ft_putstr("b: \t");
 		display(b->num, b->len);
 		printf("le pivot est %d et le lower %d\n", pivot, lower);
-		usleep(30000);*/
+		usleep(30000);
 		if (is_in_stack(a, lower))
 			in_a(a, b, pivot, lower);
 		else
@@ -297,12 +297,15 @@ void 		quicksort(t_stack *a, t_stack *b)
 {
 	int		pivot;
 	int		len;
+	int		i;
 
 	len = a->len;
+	i = 0;
 	pivot = get_pivot(a);
 	if (check_stack(a))
 		return short_sort(a, b);
-	while (len-- > 0)
+	while (i < len)
+	{
 		if (a->num[0] <= pivot)
 		{
 			ft_putendl("pb");
@@ -313,6 +316,8 @@ void 		quicksort(t_stack *a, t_stack *b)
 			ft_putendl("ra");
 			rotate(a);
 		}
+		i++;
+	}
 	sort_b(a, b);
 	autre_tri(a, b, pivot);
 }
