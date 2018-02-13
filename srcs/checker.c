@@ -15,13 +15,13 @@
 int			main(int argc, char **argv)
 {
 	int		i;
-	t_pile	*a;
-	t_pile	*b;
+	t_stack	*a;
+	t_stack	*b;
 	int		ret;
 	char	*op;
 
-	a = new_pile(argc - 1);
-	b = new_pile(argc - 1);
+	a = new_stack(argc - 1);
+	b = new_stack(argc - 1);
 	b->len = 0;
 	i = 0;
 	while (++i < argc)
@@ -46,7 +46,7 @@ int			main(int argc, char **argv)
 		ft_putendl("OK");
 	else
 		ft_putendl("KO");
-	pile_del(&a);
-	pile_del(&b);
+	stack_del(&a);
+	stack_del(&b);
 	return (0);
 }

@@ -53,7 +53,7 @@ int		valid_ops(char *op)
 	return (1);
 }
 
-int		check_valid(t_pile *a, t_pile *b)
+int		check_valid(t_stack *a, t_stack *b)
 {
 	int		i;
 
@@ -69,14 +69,14 @@ int		check_valid(t_pile *a, t_pile *b)
 	return (1);
 }
 
-int		check_stack(t_pile *pile)
+int		check_stack(t_stack *stack)
 {
 	int		i;
 
 	i = 0;
-	while (i < pile->len)
+	while (i < stack->len)
 	{
-		if (pile->num[i] > pile->num[i + 1] && i < pile->len - 1)
+		if (stack->num[i] > stack->num[i + 1] && i < stack->len - 1)
 			return (0);
 		i++;
 	}

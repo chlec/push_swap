@@ -13,7 +13,7 @@
 #include "checker.h"
 #include "push_swap.h"
 
-int			lowest_num(t_pile *a, t_pile *b)
+int			lowest_num(t_stack *a, t_stack *b)
 {
 	int		best;
 	int		i;
@@ -36,14 +36,14 @@ int			lowest_num(t_pile *a, t_pile *b)
 	return (best);
 }
 
-int			is_in_stack(t_pile *pile, int num)
+int			is_in_stack(t_stack *stack, int num)
 {
 	int 	i;
 
 	i = 0;
-	while (i < pile->len)
+	while (i < stack->len)
 	{
-		if (pile->num[i] == num)
+		if (stack->num[i] == num)
 			return (1);
 		i++;
 	}
@@ -51,7 +51,7 @@ int			is_in_stack(t_pile *pile, int num)
 }
 
 
-int			higher(t_pile *a, t_pile *b)
+int			higher(t_stack *a, t_stack *b)
 {
 	int		best;
 	int		i;
@@ -74,14 +74,14 @@ int			higher(t_pile *a, t_pile *b)
 	return (best);
 }
 
-int			get_index(t_pile *pile, int num)
+int			get_index(t_stack *stack, int num)
 {
 	int		i;
 
 	i = 0;
-	while (i < pile->len)
+	while (i < stack->len)
 	{
-		if (pile->num[i] == num)
+		if (stack->num[i] == num)
 			return (i);
 		i++;
 	}

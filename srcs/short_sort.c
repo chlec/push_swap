@@ -13,7 +13,7 @@
 #include "checker.h"
 #include "push_swap.h"
 
-static void	short_sort_2(t_pile *a, t_pile *b)
+static void	short_sort_2(t_stack *a, t_stack *b)
 {
 	if (check_stack(a) == 1 && b->num[0] < a->num[0])
 	{
@@ -37,7 +37,7 @@ static void	short_sort_2(t_pile *a, t_pile *b)
 	}
 }
 
-void	short_sort(t_pile *a, t_pile *b)
+void	short_sort(t_stack *a, t_stack *b)
 {
 	while (!check_valid(a, b))
 	{

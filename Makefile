@@ -21,12 +21,12 @@ HEADERS_FILES = includes/
 SRCS_CHECKER =	$(PATH_SRCS)checker.c \
 	   			$(PATH_SRCS)handle.c \
 	   			$(PATH_SRCS)check_error.c \
-	   			$(PATH_SRCS)new_pile.c \
+	   			$(PATH_SRCS)new_stack.c \
 	   			$(PATH_SRCS)op.c
 
 SRCS_PUSH_SWAP =	$(PATH_SRCS)main.c \
 	   				$(PATH_SRCS)check_error.c \
-					$(PATH_SRCS)new_pile.c \
+					$(PATH_SRCS)new_stack.c \
 					$(PATH_SRCS)op.c \
 					$(PATH_SRCS)get_pivot.c \
 					$(PATH_SRCS)sort_util.c \

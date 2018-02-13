@@ -13,7 +13,7 @@
 #include "checker.h"
 #include "push_swap.h"
 
-int		get_pivot(t_pile *a)
+int		get_pivot(t_stack *a)
 {
 	int		i;
 	int		j;
@@ -43,7 +43,7 @@ int		get_pivot(t_pile *a)
 	return (pivot);
 }
 
-int		get_pivot_sort(t_pile *a, t_pile *b)
+int		get_pivot_sort(t_stack *a, t_stack *b)
 {
 	int		i;
 	int		j;

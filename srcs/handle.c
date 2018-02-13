@@ -12,7 +12,7 @@
 
 #include "checker.h"
 
-static int	check_swap(t_pile *a, t_pile *b, char *op)
+static int	check_swap(t_stack *a, t_stack *b, char *op)
 {
 	if (ft_strequ(op, "sa"))
 	{
@@ -33,7 +33,7 @@ static int	check_swap(t_pile *a, t_pile *b, char *op)
 	return (0);
 }
 
-static int	check_push(t_pile *a, t_pile *b, char *op)
+static int	check_push(t_stack *a, t_stack *b, char *op)
 {
 	if (ft_strequ(op, "pa") && b->len > 0)
 	{
@@ -48,7 +48,7 @@ static int	check_push(t_pile *a, t_pile *b, char *op)
 	return (0);
 }
 
-static int	check_rotate(t_pile *a, t_pile *b, char *op)
+static int	check_rotate(t_stack *a, t_stack *b, char *op)
 {
 	if (ft_strequ(op, "ra"))
 	{
@@ -69,7 +69,7 @@ static int	check_rotate(t_pile *a, t_pile *b, char *op)
 	return (0);
 }
 
-static int	check_rev_rotate(t_pile *a, t_pile *b, char *op)
+static int	check_rev_rotate(t_stack *a, t_stack *b, char *op)
 {
 	if (ft_strequ(op, "rra"))
 	{
@@ -90,15 +90,15 @@ static int	check_rev_rotate(t_pile *a, t_pile *b, char *op)
 	return (0);
 }
 
-int		handle_ops(char *op, t_pile *a, t_pile *b)
+int		handle_ops(char *op, t_stack *a, t_stack *b)
 {
 	if (!(check_swap(a, b, op)))
 		if (!(check_push(a, b, op)))
 			if (!check_rev_rotate(a, b, op))
 				check_rotate(a, b, op);
-	ft_putstr(op);
-	ft_putstr(": a:\t");
-	display(a->num, a->len);
+	//ft_putstr(op);
+	//ft_putstr(": a:\t");
+	//display(a->num, a->len);
 	//ft_strdel(&op);
 	return (a->len);
 }

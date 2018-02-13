@@ -13,7 +13,7 @@
 #include "checker.h"
 #include "push_swap.h"
 
-void		quick3(t_pile *a, t_pile *b)
+void		quick3(t_stack *a, t_stack *b)
 {
 	int		i;
 	int		num;
@@ -48,7 +48,7 @@ void		quick3(t_pile *a, t_pile *b)
 }
 
 //tri de b
-void 		quick4(t_pile *a, t_pile *b)
+void 		sort_b(t_stack *a, t_stack *b)
 {
 	int		pivot;
 	int		i;
@@ -96,22 +96,19 @@ void 		quick4(t_pile *a, t_pile *b)
 			}
 			i++;
 		}
-		quick4(a, b);
+		sort_b(a, b);
 	}
 }
 
 //une sorte de quicksort? il met les plus petit dans b et les plus grands a la fin de a
-void		tri_3(t_pile *a, t_pile *b, int pivot)
+static void	split_lower_n_higher(t_stack *a, t_stack *b, int pivot)
 {
-	int		i;
 	int		first;
 	int		on_right;
 
-	i = 0;
 	first = lowest_num(a, b);
 	on_right = 0;
 	while (a->num[0] != first)
-	{
 		if (a->num[0] > pivot)
 		{
 			ft_putendl("ra");
@@ -123,26 +120,21 @@ void		tri_3(t_pile *a, t_pile *b, int pivot)
 			ft_putendl("pb");
 			push(b, a);
 		}
-	/*	if (b->num[0] > pivot)
-		{
-			ft_putendl("rb");
-			rotate(b);
-		}*/
-	}
 	while (on_right > 0)
 	{
 		ft_putendl("rra");
 		rev_rotate(a);
 		on_right--;
-
 	}
-	quick4(a, b);
+	sort_b(a, b);
 }
 
-int			get_lower(t_pile *a, t_pile *b, int lower, int first)
+int			get_lower(t_stack *a, t_stack *b, int first)
 {
 	int 	i;
+	int		lower;
 
+	lower = a->num[0] != first ? a->num[0] : higher(a, b);
 	i = 0;
 	while (i < b->len)
 	{
@@ -160,7 +152,7 @@ int			get_lower(t_pile *a, t_pile *b, int lower, int first)
 	return (lower);
 }
 
-void		in_a(t_pile *a, t_pile *b, int pivot, int lower)
+void		in_a(t_stack *a, t_stack *b, int pivot, int lower)
 {
 	int 	on_right;
 
@@ -218,7 +210,7 @@ void		in_a(t_pile *a, t_pile *b, int pivot, int lower)
 	}
 }
 
-void		autre_tri(t_pile *a, t_pile *b, int pivot)
+void		autre_tri(t_stack *a, t_stack *b, int pivot)
 {
 	int		num;
 	int		lower;
@@ -230,11 +222,7 @@ void		autre_tri(t_pile *a, t_pile *b, int pivot)
 	first = lowest_num(a, b);
 	while (a->num[a->len - 1] != pivot)
 	{
-		lower = a->num[0] != first ? a->num[0] : higher(a, b);
-		lower = get_lower(a, b, lower, first);
-		/*
-		 * 	ON MET L'ELEMENT EN 1ER POSITION DE A - PILE A
-		 */
+		lower = get_lower(a, b, first);
 		/*ft_putstr("a: \t");
 		display(a->num, a->len);
 		ft_putstr("b: \t");
@@ -242,14 +230,9 @@ void		autre_tri(t_pile *a, t_pile *b, int pivot)
 		printf("le pivot est %d et le lower %d\n", pivot, lower);
 		usleep(30000);*/
 		if (is_in_stack(a, lower))
-		{
 			in_a(a, b, pivot, lower);
-		}
 		else
 		{
-			/*
-			 * ON MET L'ELEMENT EN 1ER POSITION DE A - PILE B
-			 */ 
 			if (get_index(b, lower) < b->len / 2 + b->len % 2)
 			{
 				//Trier b jusqu'a sont pivot, laisser les plus petit ici
@@ -305,27 +288,21 @@ void		autre_tri(t_pile *a, t_pile *b, int pivot)
 	if (a->num[a->len - 1] != higher(a, b))
 	{
 		pivot = get_pivot_sort(a, b);
-		tri_3(a, b, pivot);
+		split_lower_n_higher(a, b, pivot);
 		autre_tri(a, b, pivot);
 	}
 }
 
-void 		quicksort(t_pile *a, t_pile *b)
+void 		quicksort(t_stack *a, t_stack *b)
 {
 	int		pivot;
-	int		i;
 	int		len;
 
-	i = 0;
 	len = a->len;
 	pivot = get_pivot(a);
 	if (check_stack(a))
-	{
-		short_sort(a, b);
-		return ;
-	}
-	while (i < len)
-	{
+		return short_sort(a, b);
+	while (len-- > 0)
 		if (a->num[0] <= pivot)
 		{
 			ft_putendl("pb");
@@ -333,20 +310,9 @@ void 		quicksort(t_pile *a, t_pile *b)
 		}
 		else
 		{
-			if (b->len >= 2 && b->num[0] < b->num[1])
-			{
-				ft_putendl("rr");
-				rotate(b);
-				rotate(a);
-			}
-			else
-			{
-				ft_putendl("ra");
-				rotate(a);
-			}
+			ft_putendl("ra");
+			rotate(a);
 		}
-		i++;
-	}
-	quick4(a, b);
-	autre_tri(a, b, get_pivot_sort(a, b));
+	sort_b(a, b);
+	autre_tri(a, b, pivot);
 }

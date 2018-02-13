@@ -13,7 +13,7 @@
 #include "checker.h"
 #include "push_swap.h"
 
-void	resolve(t_pile *a, t_pile *b)
+void	resolve(t_stack *a, t_stack *b)
 {
 	if (a->len >= 12)
 		quicksort(a, b);
@@ -24,13 +24,13 @@ void	resolve(t_pile *a, t_pile *b)
 int		main(int argc, char **argv)
 {
 	int		i;
-	t_pile	*a;
-	t_pile	*b;
+	t_stack	*a;
+	t_stack	*b;
 
 	if (argc > 2)
 	{
-		a = new_pile(argc - 1);
-		b = new_pile(argc - 1);
+		a = new_stack(argc - 1);
+		b = new_stack(argc - 1);
 		b->len = 0;
 		i = 1;
 		while (i < argc)
@@ -44,8 +44,8 @@ int		main(int argc, char **argv)
 			i++;
 		}
 		resolve(a, b);
-		pile_del(&a);
-		pile_del(&b);
+		stack_del(&a);
+		stack_del(&b);
 	}
 	return (0);
 }

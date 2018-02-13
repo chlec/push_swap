@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_pile.c                                         :+:      :+:    :+:   */
+/*   new_stack.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,29 +12,29 @@
 
 #include "checker.h"
 
-t_pile	*new_pile(int len)
+t_stack	*new_stack(int len)
 {
-	t_pile *pile;
+	t_stack *stack;
 
-	if (!(pile = (t_pile*)malloc(sizeof(t_pile))))
+	if (!(stack = (t_stack*)malloc(sizeof(t_stack))))
 		return (0);
-	pile->len = len;
+	stack->len = len;
 	if (len > 0)
-		pile->num = (int*)malloc(sizeof(int) * len);
+		stack->num = (int*)malloc(sizeof(int) * len);
 	else
-		pile->num = 0;
-	pile->sorted = 0;
-	return (pile);
+		stack->num = 0;
+	stack->sorted = 0;
+	return (stack);
 }
 
-void			pile_del(t_pile **pile)
+void			stack_del(t_stack **stack)
 {
-	if (*pile)
+	if (*stack)
 	{
-		free((*pile)->num);
-		(*pile)->num = 0;
-		free(*pile);
-		*pile = 0;
+		free((*stack)->num);
+		(*stack)->num = 0;
+		free(*stack);
+		*stack = 0;
 	}
 }
 

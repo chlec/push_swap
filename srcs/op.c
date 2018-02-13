@@ -16,7 +16,7 @@
 ** Push first element of b to a
 */
 
-void	push(t_pile *a, t_pile *b)
+void	push(t_stack *a, t_stack *b)
 {
 	int		j;
 
@@ -41,49 +41,49 @@ void	push(t_pile *a, t_pile *b)
 ** Move every elements to the bottoem. the last become the first
 */
 
-void	rev_rotate(t_pile *pile)
+void	rev_rotate(t_stack *stack)
 {
 	int		temp;
 	int		j;
 
-	temp = pile->num[pile->len - 1];
-	j = pile->len - 2;
+	temp = stack->num[stack->len - 1];
+	j = stack->len - 2;
 	while (j >= 0)
 	{
-		pile->num[j + 1] = pile->num[j];
+		stack->num[j + 1] = stack->num[j];
 		j--;
 	}
-	pile->num[0] = temp;
+	stack->num[0] = temp;
 }
 
 /*
 ** Move every elements to the top. the first become the last
 */
 
-void	rotate(t_pile *pile)
+void	rotate(t_stack *stack)
 {
 	int		j;
 	int		temp;
 
-	temp = pile->num[0];
+	temp = stack->num[0];
 	j = 0;
-	while (j + 1 < pile->len)
+	while (j + 1 < stack->len)
 	{
-		pile->num[j] = pile->num[j + 1];
+		stack->num[j] = stack->num[j + 1];
 		j++;
 	}
-	pile->num[j] = temp;
+	stack->num[j] = temp;
 }
 
 /*
 ** Swap the two first elements of a stack
 */
 
-void	swap(t_pile *pile)
+void	swap(t_stack *stack)
 {
 	int		temp;
 
-	temp = pile->num[0];
-	pile->num[0] = pile->num[1];
-	pile->num[1] = temp;
+	temp = stack->num[0];
+	stack->num[0] = stack->num[1];
+	stack->num[1] = temp;
 }

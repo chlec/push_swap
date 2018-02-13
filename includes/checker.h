@@ -16,34 +16,34 @@
 # include <stdlib.h>
 # include "libft.h"
 
-typedef struct	s_pile
+typedef struct	s_stack
 {
 	int		*num;
 	int		len;
 	int		sorted;
-}				t_pile;
+}				t_stack;
 
-int				handle_ops(char *op, t_pile *a, t_pile *b);
+int				handle_ops(char *op, t_stack *a, t_stack *b);
 int				only_number(char *str);
 int				has_double(char *str, int *num, int len);
-t_pile			*new_pile(int len);
-void			swap(t_pile *pile);
-void			push(t_pile *a, t_pile *b);
-void			rotate(t_pile *pile);
-void			rev_rotate(t_pile *pile);
-int				check_valid(t_pile *a, t_pile *b);
+t_stack			*new_stack(int len);
+void			swap(t_stack *stack);
+void			push(t_stack *a, t_stack *b);
+void			rotate(t_stack *stack);
+void			rev_rotate(t_stack *stack);
+int				check_valid(t_stack *a, t_stack *b);
 int				valid_ops(char *op);
-void			pile_del(t_pile **pile);
+void			stack_del(t_stack **stack);
 void			display(int *list, int n);
-void 			quicksort(t_pile *a, t_pile *b);
-void			short_sort(t_pile *a, t_pile *b);
-int				check_stack(t_pile *pile);
-void			autre_tri(t_pile *a, t_pile *b, int pivot);
-int				get_pivot(t_pile *a);
-int				get_pivot_sort(t_pile *a, t_pile *b);
-int				lowest_num(t_pile *a, t_pile *b);
-int				is_in_stack(t_pile *pile, int num);
-int				higher(t_pile *a, t_pile *b);
-int				get_index(t_pile *pile, int num);
+void 			quicksort(t_stack *a, t_stack *b);
+void			short_sort(t_stack *a, t_stack *b);
+int				check_stack(t_stack *stack);
+void			autre_tri(t_stack *a, t_stack *b, int pivot);
+int				get_pivot(t_stack *a);
+int				get_pivot_sort(t_stack *a, t_stack *b);
+int				lowest_num(t_stack *a, t_stack *b);
+int				is_in_stack(t_stack *stack, int num);
+int				higher(t_stack *a, t_stack *b);
+int				get_index(t_stack *stack, int num);
 
 #endif
