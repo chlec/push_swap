@@ -6,12 +6,12 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 12:12:59 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:45:48 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 # define ABS(value) value < 0 ? -value : value
 # include <stdio.h>
 # include <stdlib.h>
@@ -36,7 +36,7 @@ int				check_valid(t_stack *a, t_stack *b);
 int				valid_ops(char *op);
 void			stack_del(t_stack **stack);
 void			display(int *list, int n);
-void 			quicksort(t_stack *a, t_stack *b);
+void			quicksort(t_stack *a, t_stack *b);
 void			short_sort(t_stack *a, t_stack *b);
 int				check_stack(t_stack *stack);
 void			autre_tri(t_stack *a, t_stack *b, int pivot);

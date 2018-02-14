@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 11:45:04 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 11:43:07 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:30:13 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int		has_double(char *str, int *num, int len)
 
 int		valid_ops(char *op)
 {
-	//sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr
 	if (!ft_strequ(op, "sa") &&
 		!ft_strequ(op, "sb") &&
 		!ft_strequ(op, "ss") &&

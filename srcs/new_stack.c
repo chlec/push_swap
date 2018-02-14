@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 12:10:19 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:28:32 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	display(int *list, int n)
 	int		i;
 
 	i = 0;
-	while (i < n) {
+	while (i < n)
+	{
 		ft_putnbr(list[i]);
 		ft_putchar(' ');
 		i++;

@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:41:08 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 12:41:18 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:32:17 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	push_last_b_numbers(t_stack *a, t_stack *b)
 	rotate(a);
 }
 
-void 		sort_b(t_stack *a, t_stack *b)
+void		sort_b(t_stack *a, t_stack *b)
 {
 	int		pivot;
 	int		len;
@@ -36,7 +36,7 @@ void 		sort_b(t_stack *a, t_stack *b)
 
 	len = b->len;
 	if (b->len <= 2)
-		return push_last_b_numbers(a, b);
+		return (push_last_b_numbers(a, b));
 	pivot = get_pivot(b);
 	i = 0;
 	while (i < len)

@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:43:40 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 12:43:47 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:36:48 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	move_number_on_right(t_stack *a, t_stack *b, int on_right)
 	push(b, a);
 	while (on_right > 0)
 	{
-		if (b->len >= 2 && b->num[0] > b->num[1] && b->num[0] > b->num[b->len - 1])
+		if (b->len >= 2 &&
+				b->num[0] > b->num[1] && b->num[0] > b->num[b->len - 1])
 		{
 			ft_putendl("rrr");
 			rev_rotate(b);
@@ -55,7 +56,7 @@ static void	swap_a(t_stack *a, t_stack *b, int lower)
 
 void		lower_in_a(t_stack *a, t_stack *b, int pivot, int lower)
 {
-	int 	on_right;
+	int		on_right;
 
 	on_right = 0;
 	while (a->num[0] != lower && a->num[1] != lower)

@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 17:37:51 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 17:39:10 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:37:31 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			lowest_num(t_stack *a, t_stack *b)
 
 int			is_in_stack(t_stack *stack, int num)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	while (i < stack->len)
@@ -48,7 +48,6 @@ int			is_in_stack(t_stack *stack, int num)
 	}
 	return (0);
 }
-
 
 int			higher(t_stack *a, t_stack *b)
 {
@@ -89,7 +88,7 @@ int			get_index(t_stack *stack, int num)
 
 int			get_lower(t_stack *a, t_stack *b, int first)
 {
-	int 	i;
+	int		i;
 	int		lower;
 
 	lower = a->num[0] != first ? a->num[0] : higher(a, b);

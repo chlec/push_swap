@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 12:31:42 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:29:47 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	split_to_pivot(t_stack *a, t_stack *b, int pivot)
 	sort_b(a, b);
 }
 
-void 		quicksort(t_stack *a, t_stack *b)
+void	quicksort(t_stack *a, t_stack *b)
 {
 	int		pivot;
 	int		len;
@@ -50,7 +50,7 @@ void 		quicksort(t_stack *a, t_stack *b)
 	i = 0;
 	pivot = get_pivot(a);
 	if (check_stack(a))
-		return short_sort(a, b);
+		return (short_sort(a, b));
 	while (i < len)
 	{
 		if (a->num[0] <= pivot)

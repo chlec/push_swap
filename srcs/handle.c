@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:19:30 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/07 14:37:30 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:29:02 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int	check_rev_rotate(t_stack *a, t_stack *b, char *op)
 	return (0);
 }
 
-int		handle_ops(char *op, t_stack *a, t_stack *b)
+int			handle_ops(char *op, t_stack *a, t_stack *b)
 {
 	if (!(check_swap(a, b, op)))
 		if (!(check_push(a, b, op)))

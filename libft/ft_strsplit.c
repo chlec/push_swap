@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:48:04 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/17 11:29:59 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:47:05 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ char		**ft_strsplit(char const *s, char c)
 		word = get_word(s, start, end);
 		if (word[0] != '\0' && ft_isprint(word[0]))
 			tab[id++] = word;
-		else
-	   		ft_strdel(&word);
 		start = end;
 	}
 	tab[id] = 0;
