@@ -6,14 +6,13 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 13:45:48 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:36:36 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # define ABS(value) value < 0 ? -value : value
-# include <stdio.h>
 # include <stdlib.h>
 # include "libft.h"
 
@@ -27,13 +26,13 @@ typedef struct	s_stack
 int				handle_ops(char *op, t_stack *a, t_stack *b);
 int				only_number(char *str);
 int				has_double(char *str, int *num, int len);
+int				valid_number(char *str);
 t_stack			*new_stack(int len);
 void			swap(t_stack *stack);
 void			push(t_stack *a, t_stack *b);
 void			rotate(t_stack *stack);
 void			rev_rotate(t_stack *stack);
 int				check_valid(t_stack *a, t_stack *b);
-int				valid_ops(char *op);
 void			stack_del(t_stack **stack);
 void			display(int *list, int n);
 void			quicksort(t_stack *a, t_stack *b);

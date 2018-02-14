@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 11:45:04 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 13:30:13 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:32:27 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,10 @@ int		has_double(char *str, int *num, int len)
 	return (0);
 }
 
-int		valid_ops(char *op)
+int		valid_number(char *str)
 {
-	if (!ft_strequ(op, "sa") &&
-		!ft_strequ(op, "sb") &&
-		!ft_strequ(op, "ss") &&
-		!ft_strequ(op, "pa") &&
-		!ft_strequ(op, "pb") &&
-		!ft_strequ(op, "ra") &&
-		!ft_strequ(op, "rb") &&
-		!ft_strequ(op, "rr") &&
-		!ft_strequ(op, "rra") &&
-		!ft_strequ(op, "rrb") &&
-		!ft_strequ(op, "rrr"))
+	if ((ft_atoi(str) > 0 && str[0] == '-')
+			|| (ft_atoi(str) < 0 && str[0] != '-'))
 		return (0);
 	return (1);
 }

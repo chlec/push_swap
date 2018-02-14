@@ -6,15 +6,27 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 13:47:32 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:32:55 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	valid_number(char *str)
+static int	valid_ops(char *op)
 {
-	(void)str;
+	if (!ft_strequ(op, "sa") &&
+		!ft_strequ(op, "sb") &&
+		!ft_strequ(op, "ss") &&
+		!ft_strequ(op, "pa") &&
+		!ft_strequ(op, "pb") &&
+		!ft_strequ(op, "ra") &&
+		!ft_strequ(op, "rb") &&
+		!ft_strequ(op, "rr") &&
+		!ft_strequ(op, "rra") &&
+		!ft_strequ(op, "rrb") &&
+		!ft_strequ(op, "rrr"))
+		return (0);
+	return (1);
 }
 
 static int	store_number(t_stack *a, int argc, char **argv)

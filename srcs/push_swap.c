@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/08 16:17:35 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:35:42 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ int		main(int argc, char **argv)
 		a = new_stack(argc - 1);
 		b = new_stack(argc - 1);
 		b->len = 0;
-		i = 1;
-		while (i < argc)
+		i = -1;
+		while (++i < argc)
 		{
-			if (!only_number(argv[i]) || has_double(argv[i], a->num, i - 1))
+			if (!valid_number(argv[i]) ||
+					!only_number(argv[i]) || has_double(argv[i], a->num, i - 1))
 			{
 				ft_putendl_fd("Error", 2);
 				return (0);
 			}
 			a->num[i - 1] = ft_atoi(argv[i]);
-			i++;
 		}
 		resolve(a, b);
 		stack_del(&a);
