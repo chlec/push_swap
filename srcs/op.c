@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:19:30 by clecalie          #+#    #+#             */
-/*   Updated: 2018/01/31 16:57:37 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:00:33 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	push(t_stack *a, t_stack *b)
 {
 	int		j;
 
-	j = a->len;
+	j = a->len - 1;
 	while (j >= 0)
 	{
 		a->num[j + 1] = a->num[j];

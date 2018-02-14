@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/07 14:35:28 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 11:49:05 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int			main(int argc, char **argv)
 	int		ret;
 	char	*op;
 
+	if (argc == 1)
+		return (0);
 	a = new_stack(argc - 1);
 	b = new_stack(argc - 1);
 	b->len = 0;

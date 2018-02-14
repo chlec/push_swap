@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 17:39:12 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:12:59 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ int				get_index(t_stack *stack, int num);
 int				get_lower(t_stack *a, t_stack *b, int first);
 void			split_to_pivot(t_stack *a, t_stack *b, int pivot);
 void			sort_a(t_stack *a, t_stack *b, int pivot);
+void			sort_b(t_stack *a, t_stack *b);
+void			lower_in_a(t_stack *a, t_stack *b, int pivot, int lower);
 
 #endif

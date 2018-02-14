@@ -30,7 +30,9 @@ SRCS_PUSH_SWAP =	$(PATH_SRCS)push_swap.c \
 					$(PATH_SRCS)op.c \
 					$(PATH_SRCS)get_pivot.c \
 					$(PATH_SRCS)sort_util.c \
+					$(PATH_SRCS)sort_a.util.c \
 					$(PATH_SRCS)sort_a.c \
+					$(PATH_SRCS)sort_b.c \
 					$(PATH_SRCS)quicksort.c \
 					$(PATH_SRCS)short_sort.c
 

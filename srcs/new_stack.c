@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 15:03:54 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:10:19 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_stack	*new_stack(int len)
 	return (stack);
 }
 
-void			stack_del(t_stack **stack)
+void	stack_del(t_stack **stack)
 {
 	if (*stack)
 	{
@@ -38,7 +38,7 @@ void			stack_del(t_stack **stack)
 	}
 }
 
-void display(int *list, int n)
+void	display(int *list, int n)
 {
 	int		i;
 
