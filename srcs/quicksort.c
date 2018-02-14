@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 17:40:59 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 11:21:00 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ static void	push_last_b_numbers(t_stack *a, t_stack *b)
 	}
 	ft_putendl("ra");
 	rotate(a);
+	ft_putstr("a: \t");
+	display(a->num, a->len);
+	ft_putstr("b: \t");
+	display(b->num, b->len);
+	sleep(2);
 }
 
 void 		sort_b(t_stack *a, t_stack *b)
@@ -51,8 +56,14 @@ void 		sort_b(t_stack *a, t_stack *b)
 			ft_putendl("rb");
 			rotate(b);
 		}
+/*		ft_putstr("a: \t");
+		display(a->num, a->len);
+		ft_putstr("b: \t");
+		display(b->num, b->len);
+		printf("pivot: %d\n", pivot);*/
 		i++;
 	}
+//	sleep(2);
 	sort_b(a, b);
 }
 
@@ -110,10 +121,10 @@ void 		quicksort(t_stack *a, t_stack *b)
 		i++;
 	}
 	sort_b(a, b);
-	ft_putstr("a: \t");
+/*	ft_putstr("a: \t");
 	display(a->num, a->len);
 	ft_putstr("b: \t");
-	display(b->num, b->len);
-	sleep(2);
+	display(b->num, b->len);*/
+//	sleep(2);
 	sort_a(a, b, pivot);
 }

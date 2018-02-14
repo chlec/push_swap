@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:59:47 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/09 17:41:59 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/14 11:22:52 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ void		sort_a(t_stack *a, t_stack *b, int pivot)
 	while (a->num[a->len - 1] != pivot)
 	{
 		lower = get_lower(a, b, first);
-		/*ft_putstr("a: \t");
+		ft_putstr("a: \t");
 		display(a->num, a->len);
 		ft_putstr("b: \t");
 		display(b->num, b->len);
 		printf("le pivot est %d et le lower %d\n", pivot, lower);
-		usleep(30000);*/
+		usleep(30000);
 		if (is_in_stack(a, lower))
 			in_a(a, b, pivot, lower);
 		else
