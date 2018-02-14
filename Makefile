@@ -6,7 +6,7 @@
 #    By: clecalie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/15 16:24:08 by clecalie          #+#    #+#              #
-#    Updated: 2018/02/09 17:40:12 by clecalie         ###   ########.fr        #
+#    Updated: 2018/02/14 14:43:56 by clecalie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,26 @@ OBJS_CHECKER_FILTERED = $(notdir $(OBJS_CHECKER))
 
 OBJS_PUSH_SWAP_FILTERED = $(notdir $(OBJS_PUSH_SWAP))
 
-LIB_OBJS = libft/*.o
+LIB_OBJS = libft/ft_putendl.o \
+		   libft/ft_atoi.o \
+		   libft/ft_isdigit.o \
+		   libft/ft_putchar.o \
+		   libft/ft_putendl_fd.o \
+		   libft/ft_putnbr.o \
+		   libft/ft_strdel.o \
+		   libft/ft_strequ.o \
+		   libft/ft_strlen.o \
+		   libft/get_next_line.o \
+		   libft/ft_memcpy.o \
+		   libft/ft_putchar_fd.o \
+		   libft/ft_putstr.o \
+		   libft/ft_putstr_fd.o \
+		   libft/ft_strchr.o \
+		   libft/ft_strcpy.o \
+		   libft/ft_strdup.o \
+		   libft/ft_strnew.o \
+		   libft/ft_strsub.o \
+		   libft/ft_bzero.o
 
 FLAGS = -Wall -Werror -Wextra
 
