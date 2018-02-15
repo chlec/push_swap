@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 11:45:04 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 14:32:27 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/15 10:22:58 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		only_number(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]) && (str[i] == '-' && i != 0))
+		if (!ft_isdigit(str[i]) && (str[i] != '-' && i == 0))
 			return (0);
 		if (str[0] == '-' && ft_strlen(str) == 1)
 			return (0);

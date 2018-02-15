@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 14:05:16 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 14:35:42 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/15 10:30:37 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		main(int argc, char **argv)
 		a = new_stack(argc - 1);
 		b = new_stack(argc - 1);
 		b->len = 0;
-		i = -1;
+		i = 0;
 		while (++i < argc)
 		{
 			if (!valid_number(argv[i]) ||
