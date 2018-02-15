@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 11:45:04 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/15 10:22:58 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/15 16:33:53 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 int		only_number(char *str)
 {
+	int		nb;
+	char	*str_nbr;
 	int		i;
 
 	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]) && (str[i] != '-' && i == 0))
-			return (0);
-		if (str[0] == '-' && ft_strlen(str) == 1)
-			return (0);
+	nb = ft_atoi(str);
+	str_nbr = ft_itoa(nb);
+	while ((str[i] == '0' || str[i] == '+') && str[i + 1])
 		i++;
+	if (str[i] == str_nbr[0])
+	{
+		ft_strdel(&str_nbr);
+		return (1);
 	}
-	return (1);
+	ft_strdel(&str_nbr);
+	return (0);
 }
 
 int		has_double(char *str, int *num, int len)

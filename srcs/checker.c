@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 14:32:55 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/15 16:24:51 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	get_and_exec_op(t_stack *a, t_stack *b)
 		{
 			ft_putendl_fd("Error", 2);
 			ft_strdel(&op);
+			stack_del(&a);
+			stack_del(&b);
 			return (0);
 		}
 		a->len = handle_ops(op, a, b);
@@ -66,7 +68,6 @@ static int	get_and_exec_op(t_stack *a, t_stack *b)
 
 int			main(int argc, char **argv)
 {
-	int		i;
 	t_stack	*a;
 	t_stack	*b;
 
@@ -75,10 +76,11 @@ int			main(int argc, char **argv)
 	a = new_stack(argc - 1);
 	b = new_stack(argc - 1);
 	b->len = 0;
-	i = 0;
 	if (!store_number(a, argc, argv))
 	{
 		ft_putendl_fd("Error", 2);
+		stack_del(&a);
+		stack_del(&b);
 		return (0);
 	}
 	if (!(get_and_exec_op(a, b)))
