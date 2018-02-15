@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 13:28:32 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/15 16:39:48 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ t_stack	*new_stack(int len)
 	t_stack *stack;
 
 	if (!(stack = (t_stack*)malloc(sizeof(t_stack))))
-		return (0);
+		exit(0);
 	stack->len = len;
 	if (len > 0)
-		stack->num = (int*)malloc(sizeof(int) * len);
+	{
+		if (!(stack->num = (int*)malloc(sizeof(int) * len)))
+			exit(0);
+	}
 	else
 		stack->num = 0;
 	stack->sorted = 0;
