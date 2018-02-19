@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/19 13:46:53 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/19 14:41:45 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int			main(int argc, char **argv)
 	i = 1;
 	if (argc == 1)
 		return (0);
-	if (argv[1][0] == '-' && (ft_strchr(argv[1], 'v') || ft_strchr(argv[1], 'o')))
+	if (argv[1][0] == '-' && ft_strpbrk(argv[1], "vo"))
 		i = 2;
 	a = new_stack(argc - i);
 	b = new_stack(argc - i);
@@ -109,10 +109,7 @@ int			main(int argc, char **argv)
 	}
 	if (!(get_and_exec_op(a, b, argv)))
 		return (0);
-	if (check_valid(a, b))
-		ft_putendl("OK");
-	else
-		ft_putendl("KO");
+	ft_putendl(check_valid(a, b) ? "OK" : "KO");
 	stack_del(&a);
 	stack_del(&b);
 	return (0);

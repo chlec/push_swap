@@ -6,7 +6,7 @@
 #    By: clecalie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/15 16:24:08 by clecalie          #+#    #+#              #
-#    Updated: 2018/02/15 16:36:01 by clecalie         ###   ########.fr        #
+#    Updated: 2018/02/19 14:42:00 by clecalie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ LIB_OBJS = libft/ft_putendl.o \
 		   libft/ft_strsub.o \
 		   libft/ft_bzero.o \
 		   libft/ft_itoa.o \
-		   libft/ft_strrev.o
+		   libft/ft_strrev.o \
+		   libft/ft_strpbrk.o
 
 FLAGS = -Wall -Werror -Wextra
 
