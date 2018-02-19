@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:00:59 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/14 14:36:36 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/19 12:30:33 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			rotate(t_stack *stack);
 void			rev_rotate(t_stack *stack);
 int				check_valid(t_stack *a, t_stack *b);
 void			stack_del(t_stack **stack);
-void			display(int *list, int n);
+void			display(int *list, int n, int c);
 void			quicksort(t_stack *a, t_stack *b);
 void			short_sort(t_stack *a, t_stack *b);
 int				check_stack(t_stack *stack);

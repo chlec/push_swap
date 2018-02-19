@@ -6,7 +6,7 @@
 /*   By: clecalie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:54:09 by clecalie          #+#    #+#             */
-/*   Updated: 2018/02/15 16:39:48 by clecalie         ###   ########.fr       */
+/*   Updated: 2018/02/19 13:11:52 by clecalie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,14 @@ void	stack_del(t_stack **stack)
 	}
 }
 
-void	display(int *list, int n)
+void	display(int *list, int n, int c)
 {
 	int		i;
 
+	(void)c;
+	ft_putstr("\033[0;3");
+	ft_putchar(c);
+	ft_putchar('m');
 	i = 0;
 	while (i < n)
 	{
@@ -52,5 +56,6 @@ void	display(int *list, int n)
 		ft_putchar(' ');
 		i++;
 	}
+	ft_putstr("\033[0m");
 	ft_putchar('\n');
 }
