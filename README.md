@@ -1,5 +1,4 @@
-### Push_swap proje
-ct at 42.
+### Push_swap project at 42.
 
 In this project we should order a list of number with 2 stacks (A and B) using less possible operations.
 
@@ -15,6 +14,8 @@ We were limited by these operators:
 - **pb**: Push the first number from stack A to stack B. It will be at the first position of B
 
 ### Example
+
+Example with this list of number: `2 1 3 6 5 8`
 
 - Operator: sa  
   Stack A: 	1 2 3 6 5 8  
